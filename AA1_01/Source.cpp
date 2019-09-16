@@ -19,16 +19,18 @@
 int main() {
 	srand(time(NULL));
 
-	/*xml_document<> doc;
-	std::ifstream file("../../res/files/BookStore.xml");
+	std::vector<Enemy> enemies;
+	initializeEnemies(enemies, 10, 4);
+
+	rapidxml::xml_document<> doc;
+	std::ifstream file("../../res/files/Enemies.xml");
 	std::stringstream buffer;
 	buffer << file.rdbuf();
+
 	file.close();
 	std::string content(buffer.str());
 	doc.parse<0>(&content[0]);
-	*/
-	std::vector<Enemy> enemies;
-	initializeEnemies(enemies, 10, 4);
+	
 	system("pause");
 	return 0;
 }
