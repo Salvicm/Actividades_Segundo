@@ -20,7 +20,7 @@ int main() {
 
 	std::vector<Enemy> enemies;
 	std::map<int, weapons> weaponIdentifier;
-	initializeEnemies(enemies, 10, weaponIdentifier, 4);
+	initializeEnemies(enemies, NUMBERENEMIES, weaponIdentifier, NUMBERWEAPONS);
 
 	std::map<int, weapons>::iterator it = weaponIdentifier.begin();
 	while(it != weaponIdentifier.end()){

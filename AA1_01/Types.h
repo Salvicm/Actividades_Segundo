@@ -1,5 +1,5 @@
 #pragma once
-
+const int NUMBERENEMIES = 5, NUMBERWEAPONS = 2;
 enum WeaponTypes {
 	CUTLASS, SMALLSWORD, MUSKET, AXE, BOW, FLAIL, COUNTER
 };
