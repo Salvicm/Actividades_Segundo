@@ -14,3 +14,4 @@ struct weapons {
 	}*/
 };
 
+#pragma once

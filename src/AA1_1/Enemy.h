@@ -11,7 +11,7 @@ public:
 	Enemy(int, int, int, int, int, std::string, std::vector<weapons>);
 
 	~Enemy();
-private: 
+private:
 	std::string name;
 	int vit;
 	int atkDmg;
@@ -22,3 +22,4 @@ private:
 };
 
 void initializeEnemies(std::vector<Enemy> &enemies, int numEnemies, std::map<int, weapons> &weaponRegister, int numWeapons);
+#pragma once
