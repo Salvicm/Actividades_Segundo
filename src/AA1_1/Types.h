@@ -1,5 +1,6 @@
 #pragma once
 const int NUMBERENEMIES = 5, NUMBERWEAPONS = 2;
+#include <string>
 
 
 struct weapons {
@@ -11,5 +12,3 @@ struct weapons {
 		type = _type;
 	}*/
 };
-
-#pragma once

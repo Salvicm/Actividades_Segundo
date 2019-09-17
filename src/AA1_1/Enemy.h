@@ -1,7 +1,6 @@
 #pragma once
 #include "Types.h"
 #include <vector>
-#include <string>
 #include <map>
 
 class Enemy
@@ -11,7 +10,7 @@ public:
 	Enemy(int, int, int, int, int, std::string, std::vector<weapons>);
 
 	~Enemy();
-private:
+
 	std::string name;
 	int vit;
 	int atkDmg;

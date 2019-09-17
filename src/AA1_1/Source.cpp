@@ -41,20 +41,27 @@ int main() {
 	doc.parse<0>(&content[0]);
 
 	rapidxml::xml_node<> *pRoot = doc.first_node();
-	
-
+	initializeEnemies(pRoot, enemies);
+	for (Enemy currentEnemy : enemies) {
+		std::cout << "Name: " << currentEnemy.name << std::endl << "Vit: " << currentEnemy.vit << std::endl;
+		std::cout << "AtkDmg: " << currentEnemy.atkDmg << std::endl << "AtkFreq: " << currentEnemy.atkFreq << std::endl;
+		std::cout << "Defense: " << currentEnemy.def << std::endl << "Experience: " << currentEnemy.defeatedExp << std::endl << std::endl;
+	}
 	system("pause");
 	return 0;
 }
-
-void initializeEnemies(rapidxml::xml_node<> *pRoot) {
+void initializeWeapons();
+void initializeEnemies(rapidxml::xml_node<> *pRoot, std::vector<Enemy> &enemies) {
 	int vit;
 	int atkDmg;
 	int atkFreq;
 	std::vector<weapons> weaponsList;
 	std::string name;
 
-	for (rapidxml::xml_node<> *pNode = pRoot->first_node; pNode; pNode = pNode->next_sibling()) {
-
+	for (rapidxml::xml_node<> *pNode = pRoot->first_node(); pNode; pNode = pNode->next_sibling()) {
+		vit = pNode->first_node("vit")->value();
+		atkDmg = pNode->first_node("atkDmg")->value();
+		atkFreq = pNode->first_node("atkFreq")->value();
+		name = pNode->first_node("name")->value();
 	}
 }
