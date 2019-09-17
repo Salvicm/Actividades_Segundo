@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<enemies>
+  <enemy>
+    <name>Luffy</name>
+    <vit>500</vit>
+    <def>95</def>
+    <atkDmg>200</atkDmg>
+    <atkFreq>10</atkFreq>
+    <exp>300</exp>
+    
+    <weaponId>PISTOL</weaponId>
+    <weaponId>BAZOOKA</weaponId>
+  </enemy>
+  
+  <enemy>
+    <name>Zoro</name>
+    <vit>850</vit>
+    <def>80</def>
+    <atkDmg>175</atkDmg>
+    <atkFreq>8</atkFreq>
+    <exp>250</exp>
+    <weaponId>WADO ICHIMONJI</weaponId>
+    <weaponId>SANDAI KITETSU</weaponId>
+  </enemy>
+  
+  <enemy>
+    <name>Nami</name>
+    <vit>260</vit>
+    <def>50</def>
+    <atkDmg>350</atkDmg>
+    <atkFreq>190</atkFreq>
+    <exp>75</exp>
+    <weaponId>CLIMA TACT</weaponId>
+    <weaponId>SORCERY CLIMA TACT</weaponId>
+  </enemy>
+  
+  <enemy>
+    <name>Nico Robin</name>
+    <vit>200</vit>
+    <def>40</def>
+    <atkDmg>400</atkDmg>
+    <atkFreq>2</atkFreq>
+    <exp>50</exp>
+    <weaponId>GIGANTESCO MANO</weaponId>
+    <weaponId>MIL FLEUR</weaponId>
+  </enemy>
+  
+
+</enemies>

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<weapons>
+  
+  <weapon type="Gun">
+    <id>PISTOL</id>
+    <range>20</range>
+  </weapon>
+  
+  <weapon type="Gun">
+    <id>BAZOOKA</id>
+    <range>25</range>
+  
+</weapon>
+  
+  <weapon type="Katana">
+    <id>WADO ICHIMONJI</id>
+    <range>2</range>
+  </weapon>
+  
+  <weapon type="Katana">
+    <id>SANDAI KITETSU</id>
+    <range>1</range>
+  </weapon>
+  
+  <weapon type="Bo">
+    <id>CLIMA TACT</id>
+    <range>0.5</range>
+  </weapon>
+  
+  <weapon type="Bo">
+    <id>SORCERY CLIMA TACT</id>
+    <range>12</range>
+  </weapon>
+  
+  <weapon type="Devil Fruit">
+    <id>GIGANTESCO MANO</id>
+    <range>15</range>
+  </weapon>
+
+  <weapon type="Devil Fruit">
+    <id>MIL FLEUR</id>
+    <range>10</range>
+  </weapon>
+
+  
+  
+  
+  
+</weapons>
