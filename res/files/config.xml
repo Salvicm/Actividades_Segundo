@@ -3,7 +3,7 @@
 <enemies>
   <enemy>
     <name>Luffy</name>
-    <vit>500</vit>
+    <vit>1500</vit>
     <def>95</def>
     <atkDmg>200</atkDmg>
     <atkFreq>10</atkFreq>
@@ -20,6 +20,7 @@
     <atkDmg>175</atkDmg>
     <atkFreq>8</atkFreq>
     <exp>250</exp>
+    
     <weaponId>WADO ICHIMONJI</weaponId>
     <weaponId>SANDAI KITETSU</weaponId>
   </enemy>
@@ -36,6 +37,42 @@
   </enemy>
   
   <enemy>
+    <name>Sanji</name>
+    <vit>100</vit>
+    <def>80</def>
+    <atkDmg>120</atkDmg>
+    <atkFreq>10</atkFreq>
+    <exp>250</exp>
+
+    <weaponId>MOUTON SHOT</weaponId>
+    <weaponId>SKY WALK</weaponId>
+  </enemy>
+  
+  <enemy>
+    <name>Usopp</name>
+    <vit>50</vit>
+    <def>70</def>
+    <atkDmg>45</atkDmg>
+    <atkFreq>6</atkFreq>
+    <exp>180</exp>
+
+    <weaponId>GINGA PACHINKO</weaponId>
+    <weaponId>KURO KABUTO</weaponId>
+  </enemy>
+  
+  <enemy>
+    <name>Chopper</name>
+    <vit>1000</vit>
+    <def>60</def>
+    <atkDmg>150</atkDmg>
+    <atkFreq>8</atkFreq>
+    <exp>100</exp>
+
+    <weaponId>BRAIN POINT</weaponId>
+    <weaponId>MONSTER POINT</weaponId>
+  </enemy>
+  
+  <enemy>
     <name>Nico Robin</name>
     <vit>200</vit>
     <def>40</def>
@@ -45,6 +82,29 @@
     <weaponId>GIGANTESCO MANO</weaponId>
     <weaponId>MIL FLEUR</weaponId>
   </enemy>
-  
+
+  <enemy>
+    <name>Franky</name>
+    <vit>250</vit>
+    <def>250</def>
+    <atkDmg>100</atkDmg>
+    <atkFreq>10</atkFreq>
+    <exp>250</exp>
+
+    <weaponId>STRONG RIGHT</weaponId>
+    <weaponId>STRONG LEFT</weaponId>
+  </enemy>
+
+  <enemy>
+    <name>BROOK</name>
+    <vit>0</vit>
+    <def>100</def>
+    <atkDmg>85</atkDmg>
+    <atkFreq>9</atkFreq>
+    <exp>250</exp>
+
+    <weaponId>YAMI YAMI NO MI</weaponId>
+    <weaponId>SOUL SOLID</weaponId>
+  </enemy>
 
 </enemies>

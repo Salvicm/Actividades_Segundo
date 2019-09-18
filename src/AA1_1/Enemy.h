@@ -5,13 +5,13 @@ class Enemy
 {
 public:
 	Enemy();
-	Enemy(int, int, int, int, int, std::string, std::vector<weapons>);
+	Enemy(std::string _name, int _vit, int _def, float _atkDmg, int _atkFreq, int _defeatedExp, std::vector<weapons> _weaponsList);
 
 	~Enemy();
 
 	std::string name;
 	int vit;
-	int atkDmg;
+	float atkDmg;
 	int def;
 	int atkFreq;
 	int defeatedExp;
