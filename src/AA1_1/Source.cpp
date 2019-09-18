@@ -42,11 +42,11 @@ int main() {
 
 	rapidxml::xml_node<> *pRoot = doc.first_node();
 	printEnemies(pRoot, enemies, weaponIdentifier);
-	for (Enemy currentEnemy : enemies) {
+	/*for (Enemy currentEnemy : enemies) {
 		std::cout << "Name: " << currentEnemy.name << std::endl << "Vit: " << currentEnemy.vit << std::endl;
 		std::cout << "AtkDmg: " << currentEnemy.atkDmg << std::endl << "AtkFreq: " << currentEnemy.atkFreq << std::endl;
 		std::cout << "Defense: " << currentEnemy.def << std::endl << "Experience: " << currentEnemy.defeatedExp << std::endl << std::endl;
-	}
+	}*/
 	system("pause");
 	return 0;
 }
