@@ -42,15 +42,6 @@
     <range>10</range>
   </weapon>
 
-  <weapon type="Devil Fruit">
-    <id>MIL FLEUR</id>
-    <range>10</range>
-  </weapon>
-
-  <weapon type="Devil Fruit">
-    <id>MIL FLEUR</id>
-    <range>10</range>
-  </weapon>
 
   <weapon type="Leg">
     <id>MOUTON SHOT</id>
@@ -102,8 +93,16 @@
       <range>15</range>
     </weapon>
 
-  
 
+  <weapon type="Duplicated Weapon test">
+    <id>DUPLICATED WEAPON</id>
+    <range>15</range>
+  </weapon>
+
+  <weapon type="Duplicated Weapon test">
+    <id>DUPLICATED WEAPON</id>
+    <range>15</range>
+  </weapon>
  
 
 

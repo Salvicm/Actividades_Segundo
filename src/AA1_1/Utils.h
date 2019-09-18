@@ -30,10 +30,15 @@ namespace utils {
 			
 
 			for (rapidxml::xml_node<> *weaponNode = pNode->first_node("weaponId"); weaponNode != nullptr; weaponNode = weaponNode->next_sibling("weaponId")) {
-				weaponsList.push_back(weaponReg.at(weaponNode->value()));
+				if (weaponReg.count(weaponNode->value()) == 0) {
+					//Throw an exception(I still don't know how to do that)
+					std::cout << "WARNING: MISSING WEAPON DATA;\t WEAPON IDENTIFIER: " << weaponNode->value() << std::endl;
+				}
+				else {
+					weaponsList.push_back(weaponReg.at(weaponNode->value()));
+				}
 			}
 			enemies.push_back(Enemy(name, vit, def, atkDmg, atkFreq, exp, weaponsList));
-			std::cout << std::endl << std::endl;
 		}
 	}
 
@@ -50,10 +55,15 @@ namespace utils {
 #pragma endregion
 		weapons newWeapon;
 		for (rapidxml::xml_node<> *pNode = pRoot->first_node(); pNode; pNode = pNode->next_sibling()) {
-			// Read in order. Id is identifier, range is range, and the attribute is category
-			newWeapon = weapons{ pNode->first_attribute()->value(), pNode->first_node("id")->value(), std::stoi(pNode->first_node("range")->value()) };
-			weaponList.insert({ newWeapon.identifier, newWeapon });
-
+			if (weaponList.count(pNode->first_node("id")->value()) != 0) {
+				//Throw an exception(I still don't know how to do it)
+				std::cout << "WARNING: REPEATED WEAPON;\t WEAPON ID: " << pNode->first_node("id")->value() << std::endl;
+			}
+			else {
+				// Read in order. Id is identifier, range is range, and the attribute is category
+				newWeapon = weapons{ pNode->first_attribute()->value(), pNode->first_node("id")->value(), std::stoi(pNode->first_node("range")->value()) };
+				weaponList.insert({ newWeapon.identifier, newWeapon });
+			}
 		}
 	}
 	void printEnemies(std::vector<Enemy> enemies) {

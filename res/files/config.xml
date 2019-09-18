@@ -46,6 +46,7 @@
 
     <weaponId>MOUTON SHOT</weaponId>
     <weaponId>SKY WALK</weaponId>
+    <weaponId>UNEXISTENT WEAPON TEST</weaponId>
   </enemy>
   
   <enemy>
