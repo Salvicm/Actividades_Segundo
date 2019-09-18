@@ -2,7 +2,7 @@
 
 <enemies>
   <enemy>
-    <name>Luffy</name>
+    <name shipRole="Captain">Luffy</name>
     <vit>500</vit>
     <def>95</def>
     <atkDmg>200</atkDmg>
@@ -14,7 +14,7 @@
   </enemy>
   
   <enemy>
-    <name>Zoro</name>
+    <name shipRole="First Mate">Zoro</name>
     <vit>850</vit>
     <def>80</def>
     <atkDmg>175</atkDmg>
@@ -25,7 +25,7 @@
   </enemy>
   
   <enemy>
-    <name>Nami</name>
+    <name shipRole="Navigator">Nami</name>
     <vit>260</vit>
     <def>50</def>
     <atkDmg>350</atkDmg>
@@ -35,7 +35,7 @@
     <weaponId>SORCERY CLIMA TACT</weaponId>
   </enemy>
   
-  <enemy>
+  <enemy shipRole="Archaeologyst">
     <name>Nico Robin</name>
     <vit>200</vit>
     <def>40</def>
