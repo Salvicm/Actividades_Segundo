@@ -24,7 +24,7 @@
   
   <weapon type="Bo">
     <id>CLIMA TACT</id>
-    <range>0.5</range>
+    <range>1</range>
   </weapon>
   
   <weapon type="Bo">

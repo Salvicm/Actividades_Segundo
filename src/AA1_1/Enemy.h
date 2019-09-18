@@ -1,7 +1,5 @@
 #pragma once
 #include "Types.h"
-#include <vector>
-#include <map>
 
 class Enemy
 {
