@@ -1,6 +1,3 @@
-#include <stdio.h>      /* printf, scanf, puts, NULL */
-#include <stdlib.h>     /* srand, rand */
-#include <time.h>       /* time */
 #include <iostream>
 #include <sstream>
 #include <stdlib.h>
@@ -15,7 +12,6 @@
 #include "Utils.h"
 
 int main() {
-	srand(time(NULL));
 	std::vector<Enemy> enemies;
 	std::map<std::string, weapons> weaponIdentifier;
 	utils::initWeapons(weaponIdentifier);
