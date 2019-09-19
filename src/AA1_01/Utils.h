@@ -23,6 +23,7 @@ namespace utils {
 		for (rapidxml::xml_node<> *pNode = pRoot->first_node(); pNode; pNode = pNode->next_sibling()) {
 			weaponsList.clear();
 
+			
 			name = pNode->first_node("name")->value();
 			vit = std::stoi(pNode->first_node("vit")->value());
 			def = std::stoi(pNode->first_node("def")->value());

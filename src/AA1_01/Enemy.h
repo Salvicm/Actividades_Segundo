@@ -17,6 +17,3 @@ public:
 	int defeatedExp;
 	std::vector<weapons> weaponsList;
 };
-
-void initializeEnemies(std::vector<Enemy> &enemies, int numEnemies, std::map<int, weapons> &weaponRegister, int numWeapons);
-#pragma once
