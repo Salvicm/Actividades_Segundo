@@ -18,7 +18,7 @@
     <vit>850</vit>
     <def>80</def>
     <atkDmg>175</atkDmg>
-    <atkFreq>8</atkFreq>
+    <atkFreq>9.5</atkFreq>
     <exp>250</exp>
     
     <weaponId>WADO ICHIMONJI</weaponId>
@@ -30,7 +30,7 @@
     <vit>260</vit>
     <def>50</def>
     <atkDmg>350</atkDmg>
-    <atkFreq>190</atkFreq>
+    <atkFreq>6.5</atkFreq>
     <exp>75</exp>
     <weaponId>CLIMA TACT</weaponId>
     <weaponId>SORCERY CLIMA TACT</weaponId>
@@ -41,12 +41,12 @@
     <vit>100</vit>
     <def>80</def>
     <atkDmg>120</atkDmg>
-    <atkFreq>10</atkFreq>
+    <atkFreq>8</atkFreq>
     <exp>250</exp>
 
     <weaponId>MOUTON SHOT</weaponId>
     <weaponId>SKY WALK</weaponId>
-    <weaponId>UNEXISTENT WEAPON TEST</weaponId>
+    <weaponId>UNINITIALIZED WEAPON</weaponId>
   </enemy>
   
   <enemy>
@@ -54,7 +54,7 @@
     <vit>50</vit>
     <def>70</def>
     <atkDmg>45</atkDmg>
-    <atkFreq>6</atkFreq>
+    <atkFreq>7.5</atkFreq>
     <exp>180</exp>
 
     <weaponId>GINGA PACHINKO</weaponId>
@@ -66,7 +66,7 @@
     <vit>1000</vit>
     <def>60</def>
     <atkDmg>150</atkDmg>
-    <atkFreq>8</atkFreq>
+    <atkFreq>5</atkFreq>
     <exp>100</exp>
 
     <weaponId>BRAIN POINT</weaponId>
@@ -78,7 +78,7 @@
     <vit>200</vit>
     <def>40</def>
     <atkDmg>400</atkDmg>
-    <atkFreq>2</atkFreq>
+    <atkFreq>7.5</atkFreq>
     <exp>50</exp>
     <weaponId>GIGANTESCO MANO</weaponId>
     <weaponId>MIL FLEUR</weaponId>
