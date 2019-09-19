@@ -17,7 +17,7 @@ int main() {
 	utils::initWeapons(weaponIdentifier);
 	utils::initEnemies(enemies, weaponIdentifier);
 	utils::printEnemies(enemies);
-	
+	std::cout << "Hello";
 	system("pause");
 	return 0;
 }
