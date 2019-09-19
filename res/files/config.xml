@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<enemies>
+<config>
+  
   <enemy>
     <name>Luffy</name>
     <vit>1500</vit>
@@ -108,4 +109,108 @@
     <weaponId>SOUL SOLID</weaponId>
   </enemy>
 
-</enemies>
+  <weapon type="Gun">
+    <id>PISTOL</id>
+    <range>20</range>
+  </weapon>
+
+  <weapon type="Gun">
+    <id>BAZOOKA</id>
+    <range>25</range>
+
+  </weapon>
+
+  <weapon type="Katana">
+    <id>WADO ICHIMONJI</id>
+    <range>2</range>
+  </weapon>
+
+  <weapon type="Katana">
+    <id>SANDAI KITETSU</id>
+    <range>1</range>
+  </weapon>
+
+  <weapon type="Bo">
+    <id>CLIMA TACT</id>
+    <range>1</range>
+  </weapon>
+
+  <weapon type="Bo">
+    <id>SORCERY CLIMA TACT</id>
+    <range>12</range>
+  </weapon>
+
+  <weapon type="Devil Fruit">
+    <id>GIGANTESCO MANO</id>
+    <range>15</range>
+  </weapon>
+
+  <weapon type="Devil Fruit">
+    <id>MIL FLEUR</id>
+    <range>10</range>
+  </weapon>
+
+  <weapon type="Leg">
+    <id>MOUTON SHOT</id>
+    <range>1</range>
+  </weapon>
+
+  <weapon type="Leg">
+    <id>SKY WALK</id>
+    <range>50</range>
+  </weapon>
+
+  <weapon type="Devil Fruit">
+    <id>MONSTER POINT</id>
+    <range>10</range>
+  </weapon>
+
+  <weapon type="Devil Fruit">
+    <id>BRAIN POINT</id>
+    <range>0</range>
+  </weapon>
+
+  <weapon type="Sword">
+    <id>SOUL SOLID</id>
+    <range>1</range>
+  </weapon>
+
+  <weapon type="Devil Fruit">
+    <id>YAMI YAMI NO MI</id>
+    <range>3</range>
+  </weapon>
+
+  <weapon type="Slingshot">
+    <id>KURO KABUTO</id>
+    <range>150</range>
+  </weapon>
+
+  <weapon type="Slingshot">
+    <id>GINGA PACHINKO</id>
+    <range>7</range>
+  </weapon>
+
+  <weapon type="Machine Gun">
+    <id>STRONG RIGHT</id>
+    <range>15</range>
+  </weapon>
+
+  <weapon type="Machine Gun">
+    <id>STRONG LEFT</id>
+    <range>15</range>
+  </weapon>
+
+
+  <weapon type="Duplicated Weapon test">
+    <id>DUPLICATED WEAPON</id>
+    <range>15</range>
+  </weapon>
+
+  <weapon type="Duplicated Weapon test">
+    <id>DUPLICATED WEAPON</id>
+    <range>15</range>
+  </weapon>
+
+
+
+</config>

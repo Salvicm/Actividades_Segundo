@@ -1,5 +1,4 @@
 #pragma once
-const int NUMBERENEMIES = 5, NUMBERWEAPONS = 2;
 #include <string>
 #include <vector>
 #include <map>

@@ -11,8 +11,7 @@
 int main() {
 	std::vector<Enemy> enemies;
 	std::map<std::string, weapons> weaponIdentifier;
-	utils::initWeapons(weaponIdentifier);
-	utils::initEnemies(enemies, weaponIdentifier);
+	utils::initData(enemies, weaponIdentifier);
 	utils::printEnemies(enemies);
 	std::cout << "Hello";
 	system("pause");

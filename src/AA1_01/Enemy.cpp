@@ -4,7 +4,7 @@ Enemy::Enemy()
 {
 }
 
-Enemy::Enemy(std::string _name, int _vit, int _def, int _atkDmg,  float _atkFreq, int _defeatedExp,  std::vector<weapons> _weaponsList) {
+Enemy::Enemy(std::string _name, int _vit, int _def, int _atkDmg,  float _atkFreq, int _defeatedExp,  std::vector<weapons*> _weaponsList) {
 	name = _name;
 	vit = _vit;
 	def = _def;
