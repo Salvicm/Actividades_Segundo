@@ -31,7 +31,7 @@ int main(int, char*[])
 	if (!(IMG_Init(imgFlags) & imgFlags)) throw "Error: SDL_image init";
 
 	//-->SDL_TTF
-	if (!TTF_Init()) throw "No es pot inicialitzar SDL_TTF";
+	if (TTF_Init() != 0) throw "No es pot inicialitzar SDL_TTF";
 	
 	//-->SDL_Mix
 
@@ -54,8 +54,7 @@ int main(int, char*[])
 	SDL_Rect textRect{ 100, 50, tmpSurf->w, tmpSurf->h };
 	SDL_FreeSurface(tmpSurf);
 	TTF_CloseFont(font);
-	//*************
-	//************
+
 
 	// --- AUDIO ---
 
