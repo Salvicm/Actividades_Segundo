@@ -1,13 +1,13 @@
 #include <SDL.h>		// Always needs to be included for an SDL app
-#include <SDL_image.h>
+#include <SDL_image.h> // Imagenes, faltaría SDL_ttf.h para fuentes y SDL_mixer.h para sonido
 
 #include <exception>
 #include <iostream>
 #include <string>
 
 //Game general information
-#define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 600
+#define SCREEN_WIDTH 600
+#define SCREEN_HEIGHT 800
 
 int main(int, char*[])
 {
@@ -25,8 +25,8 @@ int main(int, char*[])
 	if (m_renderer == nullptr)
 		throw "No es pot inicialitzar SDL_Renderer";
 
-	//-->SDL_Image 
-	const Uint8 imgFlags{ IMG_INIT_PNG | IMG_INIT_JPG };
+	//-->SDL_Image	
+	const Uint8 imgFlags{ IMG_INIT_PNG | IMG_INIT_JPG }; //Esto es para indicar los formatos que vamos a cargar, en esta librería hay jpg, png, TIF y WEBP
 	if (!(IMG_Init(imgFlags) & imgFlags)) throw "Error: SDL_image init";
 
 	//-->SDL_TTF
