@@ -6,8 +6,8 @@
 #include <string>
 
 //Game general information
-#define SCREEN_WIDTH 600
-#define SCREEN_HEIGHT 800
+#define SCREEN_WIDTH 800
+#define SCREEN_HEIGHT 600
 
 int main(int, char*[])
 {
