@@ -5,3 +5,5 @@ struct vector2 {
 	int y;
 	vector2() : x(0), y(0) {};
 };
+
+//TODO funció per comprobar colisió
