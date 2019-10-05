@@ -130,8 +130,8 @@ int main(int, char*[])
 	SDL_DestroyTexture(playerTexture);
 	SDL_DestroyRenderer(m_renderer);
 	SDL_DestroyWindow(m_window);
-	Mix_CloseAudio();
 	// --- QUIT ---
+	Mix_CloseAudio();
 	IMG_Quit();
 	TTF_Quit();
 	Mix_Quit();
