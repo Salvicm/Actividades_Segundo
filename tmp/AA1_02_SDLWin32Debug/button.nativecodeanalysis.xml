@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\salvi\source\repos\salvicm\actividades_segundo\src\aa1_02_sdl</FILEPATH>
+      <FILENAME>button.cpp</FILENAME>
+      <LINE>4</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'button::clickedText' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>button::{ctor}</FUNCTION>
+    <DECORATED>??0button@@QAE@XZ</DECORATED>
+    <FUNCLINE>4</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\salvi\source\repos\salvicm\actividades_segundo\src\aa1_02_sdl</FILEPATH>
+      <FILENAME>button.cpp</FILENAME>
+      <LINE>4</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'button::posY' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>button::{ctor}</FUNCTION>
+    <DECORATED>??0button@@QAE@XZ</DECORATED>
+    <FUNCLINE>4</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\salvi\source\repos\salvicm\actividades_segundo\src\aa1_02_sdl</FILEPATH>
+      <FILENAME>button.cpp</FILENAME>
+      <LINE>4</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'button::texture' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>button::{ctor}</FUNCTION>
+    <DECORATED>??0button@@QAE@XZ</DECORATED>
+    <FUNCLINE>4</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\salvi\source\repos\salvicm\actividades_segundo\src\aa1_02_sdl</FILEPATH>
+      <FILENAME>button.cpp</FILENAME>
+      <LINE>4</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'button::noHover' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>button::{ctor}</FUNCTION>
+    <DECORATED>??0button@@QAE@XZ</DECORATED>
+    <FUNCLINE>4</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\salvi\source\repos\salvicm\actividades_segundo\src\aa1_02_sdl</FILEPATH>
+      <FILENAME>button.cpp</FILENAME>
+      <LINE>4</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'button::hover' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>button::{ctor}</FUNCTION>
+    <DECORATED>??0button@@QAE@XZ</DECORATED>
+    <FUNCLINE>4</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\salvi\source\repos\salvicm\actividades_segundo\src\aa1_02_sdl</FILEPATH>
+      <FILENAME>button.cpp</FILENAME>
+      <LINE>4</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'button::rect' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>button::{ctor}</FUNCTION>
+    <DECORATED>??0button@@QAE@XZ</DECORATED>
+    <FUNCLINE>4</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\salvi\source\repos\salvicm\actividades_segundo\src\aa1_02_sdl</FILEPATH>
+      <FILENAME>button.cpp</FILENAME>
+      <LINE>4</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'button::posX' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>button::{ctor}</FUNCTION>
+    <DECORATED>??0button@@QAE@XZ</DECORATED>
+    <FUNCLINE>4</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\salvi\source\repos\salvicm\actividades_segundo\src\aa1_02_sdl</FILEPATH>
+      <FILENAME>button.cpp</FILENAME>
+      <LINE>4</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'button::ySize' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>button::{ctor}</FUNCTION>
+    <DECORATED>??0button@@QAE@XZ</DECORATED>
+    <FUNCLINE>4</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\salvi\source\repos\salvicm\actividades_segundo\src\aa1_02_sdl</FILEPATH>
+      <FILENAME>button.cpp</FILENAME>
+      <LINE>4</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'button::xSize' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>button::{ctor}</FUNCTION>
+    <DECORATED>??0button@@QAE@XZ</DECORATED>
+    <FUNCLINE>4</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>

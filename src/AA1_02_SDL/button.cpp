@@ -39,7 +39,7 @@ bool button::checkClick(int mouseX, int mouseY, bool clickUp, bool clickDown, bu
 			// Then texture is hover version
 			texture = hover;
 			// If you click
- 			if (clickDown == true && clickUp == false && (*pressedButton == nullptr || *pressedButton == this)) {
+			if (clickDown == true && clickUp == false && (*pressedButton == nullptr || *pressedButton == this)) {
 				if (clickedText != nullptr) {
 					texture = clickedText;
 				}
@@ -51,6 +51,7 @@ bool button::checkClick(int mouseX, int mouseY, bool clickUp, bool clickDown, bu
 				*pressedButton = nullptr;
 				return true;
 			}
+			
 		}
 		//Needed for the case where you stop being on Y but not on X
 		else {

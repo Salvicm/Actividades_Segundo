@@ -110,8 +110,8 @@ while (isRunning) {
 	// Update
 	playerRect.x += ((mainMouse.x - playerRect.w / 2) - playerRect.x) / 10;
 	playerRect.y += ((mainMouse.y - playerRect.h / 2) - playerRect.y) / 10;
-
 	
+
 	if (uwuButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton)) {
 		std::cout << "Holaaaa\n";
 	}
@@ -127,7 +127,7 @@ while (isRunning) {
 			Mix_PlayMusic(bgMusic, -1);
 	}
 
-	if (mainMouse.press = false && pressedButton != nullptr) {
+	if (mainMouse.press == false && pressedButton != nullptr) {
 		pressedButton = nullptr;
 	}
 		// Draw

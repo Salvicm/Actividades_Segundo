@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?><DEFECTS><DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\salvi\source\repos\salvicm\actividades_segundo\src\aa1_02_sdl</FILEPATH>
+      <FILENAME>button.cpp</FILENAME>
+      <LINE>4</LINE>
+      <COLUMN>8</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'button::clickedText' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>button::{ctor}</FUNCTION>
+    <DECORATED>??0button@@QAE@XZ</DECORATED>
+    <FUNCLINE>4</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\salvi\source\repos\salvicm\actividades_segundo\src\aa1_02_sdl</FILEPATH>
+      <FILENAME>main.cpp</FILENAME>
+      <LINE>17</LINE>
+      <COLUMN>24</COLUMN>
+    </SFA>
+    <DEFECTCODE>6290</DEFECTCODE>
+    <DESCRIPTION>Operación bit a bit en un resultado lógico:  ! tiene mayor prioridad que &amp;. Use &amp;&amp; o (!(x &amp; y)) en su lugar.</DESCRIPTION>
+    <FUNCTION>SDL_main</FUNCTION>
+    <DECORATED>SDL_main</DECORATED>
+    <FUNCLINE>7</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\salvi\source\repos\salvicm\actividades_segundo\src\aa1_02_sdl</FILEPATH>
+      <FILENAME>main.cpp</FILENAME>
+      <LINE>133</LINE>
+      <COLUMN>21</COLUMN>
+    </SFA>
+    <DEFECTCODE>6282</DEFECTCODE>
+    <DESCRIPTION>Operador incorrecto:  asignación de constante en el contexto booleano. Considere usar '==' en su lugar.</DESCRIPTION>
+    <FUNCTION>SDL_main</FUNCTION>
+    <DECORATED>SDL_main</DECORATED>
+    <FUNCLINE>7</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT></DEFECTS>
