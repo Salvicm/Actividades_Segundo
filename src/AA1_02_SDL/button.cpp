@@ -30,7 +30,7 @@ void button::initialize(int _xPos, int _yPos, const char * _text, SDL_Color _cli
 	rect = { _xPos, _yPos, tmpSurface->w, tmpSurface->h };
 }
 
-bool button::checkClick(int mouseX, int mouseY, bool clickUp, bool clickDown, button **pressedButton)
+bool button::checkClick(int mouseX, int mouseY, bool clickUp, bool clickDown, button **pressedButton, bool invalidPress)
 {
 	//IF inside X
 	if (mouseX >= rect.x && mouseX <= rect.x + rect.w) {
@@ -39,19 +39,19 @@ bool button::checkClick(int mouseX, int mouseY, bool clickUp, bool clickDown, bu
 			// Then texture is hover version
 			texture = hover;
 			// If you click
-			if (clickDown == true && clickUp == false && (*pressedButton == nullptr || *pressedButton == this)) {
-				if (clickedText != nullptr) {
-					texture = clickedText;
+			if (invalidPress ==  false) {
+				if (clickDown == true && clickUp == false && (*pressedButton == nullptr || *pressedButton == this)) {
+					if (clickedText != nullptr) {
+						texture = clickedText;
+					}
+					*pressedButton = this;
 				}
-				clickingMe = true;
-				*pressedButton = this;
+				// If you stop clicking inside the button
+				else if (clickDown == false && clickUp == true && *pressedButton == this) {
+					*pressedButton = nullptr;
+					return true;
+				}
 			}
-			// If you stop clicking inside the button
-			else if (clickDown == false && clickUp == true && *pressedButton == this) {
-				*pressedButton = nullptr;
-				return true;
-			}
-			
 		}
 		//Needed for the case where you stop being on Y but not on X
 		else {

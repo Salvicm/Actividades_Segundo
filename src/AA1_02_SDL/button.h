@@ -14,11 +14,11 @@ public:
 	SDL_Texture *noHover;
 	SDL_Texture *clickedText;
 	SDL_Rect rect;
-	bool clickingMe = false;
-
+	// Initialize Xpos, Ypos, Text, color on hover, color base, temporal surface, font, renderer
 	void initialize(int _xPos, int _yPos, const char *_text, SDL_Color _hover, SDL_Color _noHover, SDL_Surface *tmpSurface, TTF_Font *font, SDL_Renderer *renderer);
+	// Initialize Xpos, Ypos, Text,color on click, color on hover, color base, temporal surface, font, renderer
 	void initialize(int _xPos, int _yPos, const char *_text, SDL_Color _clicked, SDL_Color _hover, SDL_Color _noHover, SDL_Surface *tmpSurface, TTF_Font *font, SDL_Renderer *renderer);
-	bool checkClick(int mouseX, int mouseY, bool clickUp, bool clickDown, button **pressedButton);
+	bool checkClick(int mouseX, int mouseY, bool clickUp, bool clickDown, button **pressedButton, bool invalidPress);
 	void destroyMyself();
 	
 private:

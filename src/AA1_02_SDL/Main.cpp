@@ -33,7 +33,7 @@ if (m_renderer == nullptr) {
 
 
 // --- SPRITES ---
-	//Background
+//Background
 SDL_Texture* bgTexture{ IMG_LoadTexture(m_renderer, "../../res/img/bg.jpg") };
 if (bgTexture == nullptr) throw "Error: bgTexture init";
 SDL_Rect bgRect{ 0,0,SCREEN_WIDTH, SCREEN_HEIGHT };
@@ -53,10 +53,10 @@ if (mainFont == nullptr)
 throw "No es pot inicialitzar the TTF_FONT";
 SDL_Surface *tmpSurf = nullptr;
 button uwuButton, playButton, exitButton, soundButton;
-uwuButton.initialize(100, 50, "UwU", SDL_Color{ 255,150,0, 255 }, SDL_Color{ 0, 150, 0, 255 }, tmpSurf, mainFont, m_renderer);
-playButton.initialize(SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT / 2 - 100, "Play", SDL_Color{255, 0, 0, 255}, SDL_Color{ 255,150,0, 255 }, SDL_Color{ 0, 150, 0, 255 }, tmpSurf, mainFont, m_renderer);
-exitButton.initialize(SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT / 2, "Exit", SDL_Color{ 255,150,0, 255 }, SDL_Color{ 0, 150, 0, 255 }, tmpSurf, mainFont, m_renderer);
-soundButton.initialize(SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT / 2 + 100, "Sound", SDL_Color{ 255,150, 0, 255 }, SDL_Color{ 0, 150, 0, 255 }, tmpSurf, mainFont, m_renderer);
+uwuButton.initialize(100, 50, "UwU", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, tmpSurf, mainFont, m_renderer);
+playButton.initialize(SCREEN_WIDTH - 250, SCREEN_HEIGHT -300, "Play", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, tmpSurf, mainFont, m_renderer);
+soundButton.initialize(SCREEN_WIDTH - 250, SCREEN_HEIGHT -200 , "Sound", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, tmpSurf, mainFont, m_renderer);
+exitButton.initialize(SCREEN_WIDTH - 250, SCREEN_HEIGHT -100, "Exit", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, tmpSurf, mainFont, m_renderer);
 
 SDL_FreeSurface(tmpSurf);
 TTF_CloseFont(mainFont);
@@ -68,7 +68,7 @@ throw "Unable to initialize SDL_mixer audio systems";
 
 Mix_Music *bgMusic{ Mix_LoadMUS("../../res/au/mainTheme.mp3") };
 if (!bgMusic) throw "Unable to load the Mix_Music soundtrack";
-Mix_VolumeMusic(0); // Üsar porcentajes, nada de nümeros completos, por següridad de qüe cambie la librería
+Mix_VolumeMusic(MIX_MAX_VOLUME  * 0.75); // Üsar porcentajes, nada de nümeros completos, por següridad de qüe cambie la librería
 Mix_PlayMusic(bgMusic, -1); // Nümero de veces qüe se reprodüce. -1 es ün bücle infinito
 
 
@@ -76,6 +76,7 @@ bool isRunning = true;
 bool clickUp = false;
 bool clickDown = false;
 button *pressedButton = nullptr;
+bool invalidPress = false;
 mouseController mainMouse;
 SDL_Event event;
 while (isRunning) {
@@ -108,28 +109,34 @@ while (isRunning) {
 		}
 	}
 	// Update
+	
+	
 	playerRect.x += ((mainMouse.x - playerRect.w / 2) - playerRect.x) / 10;
 	playerRect.y += ((mainMouse.y - playerRect.h / 2) - playerRect.y) / 10;
 	
 
-	if (uwuButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton)) {
+	if (uwuButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton, invalidPress)) {
 		std::cout << "Holaaaa\n";
 	}
-	if (playButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton)){
+	if (playButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton, invalidPress)){
 	}
-	if (exitButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton)){
+	if (exitButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton, invalidPress)){
 		isRunning = false;
 	}
-	if (soundButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton)){
+	if (soundButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton, invalidPress)){
 		if (Mix_PausedMusic() == false)
 			Mix_PauseMusic();
 		else
-			Mix_PlayMusic(bgMusic, -1);
+			Mix_ResumeMusic();
 	}
 
-	if (mainMouse.press == false && pressedButton != nullptr) {
+	if (clickDown == true && clickUp == false && pressedButton == nullptr) {
+		invalidPress = true;
+	}else if (clickDown == false && clickUp == true) {
 		pressedButton = nullptr;
+		invalidPress = false;
 	}
+
 		// Draw
 		SDL_RenderClear(m_renderer);
 		SDL_RenderCopy(m_renderer, bgTexture, nullptr, &bgRect);
