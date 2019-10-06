@@ -1,8 +1,8 @@
 #pragma once
-#include "button.h"
+#include "Button.h"
 struct mouseController {
 	int x, y;
 	bool press;
-	button *pressingButton = nullptr; 
+	Button *pressingButton = nullptr; 
 	mouseController() : x(0), y(0), press(false){};
 };

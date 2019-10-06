@@ -1,15 +1,15 @@
-#include "button.h"
+#include "Button.h"
 
 
-button::button()
+Button::Button()
 {
 }
 
-button::~button()
+Button::~Button()
 {
 }
 
-void button::initialize(int _xPos, int _yPos, const char * _text, SDL_Color _hover, SDL_Color _noHover, SDL_Surface * tmpSurface, TTF_Font * font, SDL_Renderer * renderer)
+void Button::initialize(int _xPos, int _yPos, const char * _text, SDL_Color _hover, SDL_Color _noHover, SDL_Surface * tmpSurface, TTF_Font * font, SDL_Renderer * renderer)
 {
 	tmpSurface = { TTF_RenderText_Blended(font, _text, _hover) };
 	texture = hover = { SDL_CreateTextureFromSurface(renderer, tmpSurface) };
@@ -19,7 +19,7 @@ void button::initialize(int _xPos, int _yPos, const char * _text, SDL_Color _hov
 	rect = { _xPos, _yPos, tmpSurface->w, tmpSurface->h };
 }
 /// With three colours the clicked is included
-void button::initialize(int _xPos, int _yPos, const char * _text, SDL_Color _clicked, SDL_Color _hover, SDL_Color _noHover, SDL_Surface * tmpSurface, TTF_Font * font, SDL_Renderer * renderer)
+void Button::initialize(int _xPos, int _yPos, const char * _text, SDL_Color _clicked, SDL_Color _hover, SDL_Color _noHover, SDL_Surface * tmpSurface, TTF_Font * font, SDL_Renderer * renderer)
 {
 	tmpSurface = { TTF_RenderText_Blended(font, _text, _hover) };
 	texture = hover = { SDL_CreateTextureFromSurface(renderer, tmpSurface) };
@@ -30,7 +30,7 @@ void button::initialize(int _xPos, int _yPos, const char * _text, SDL_Color _cli
 	rect = { _xPos, _yPos, tmpSurface->w, tmpSurface->h };
 }
 
-bool button::checkClick(int mouseX, int mouseY, bool clickUp, bool clickDown, button **pressedButton, bool invalidPress)
+bool Button::checkClick(int mouseX, int mouseY, bool clickUp, bool clickDown, Button **pressedButton, bool invalidPress)
 {
 	//IF inside X
 	if (mouseX >= rect.x && mouseX <= rect.x + rect.w) {
@@ -46,7 +46,7 @@ bool button::checkClick(int mouseX, int mouseY, bool clickUp, bool clickDown, bu
 					}
 					*pressedButton = this;
 				}
-				// If you stop clicking inside the button
+				// If you stop clicking inside the Button
 				else if (clickDown == false && clickUp == true && *pressedButton == this) {
 					*pressedButton = nullptr;
 					return true;
@@ -71,7 +71,7 @@ bool button::checkClick(int mouseX, int mouseY, bool clickUp, bool clickDown, bu
 }
 
 
-void button::destroyMyself()
+void Button::destroyMyself()
 {
 	SDL_DestroyTexture(texture);
 	SDL_DestroyTexture(hover);

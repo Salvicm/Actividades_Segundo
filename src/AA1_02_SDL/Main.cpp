@@ -45,6 +45,7 @@ SDL_Rect playerRect{ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 175,96 };
 //-->Animated Sprite ---
 
 // --- TEXT ---
+#pragma region font_nits
 TTF_Font *mainFont{ TTF_OpenFont("../../res/ttf/saiyan.ttf", 80) };
 if (mainFont == nullptr)
 throw "No es pot inicialitzar the TTF_FONT";
@@ -52,11 +53,15 @@ TTF_Font *subFont{ TTF_OpenFont("../../res/ttf/arial.ttf", 80) };
 if (mainFont == nullptr)
 throw "No es pot inicialitzar the TTF_FONT";
 SDL_Surface *tmpSurf = nullptr;
-button uwuButton, playButton, exitButton, soundButton;
+#pragma endregion
+//Button initialization
+#pragma region "Button Initialization"
+Button uwuButton, playButton, exitButton, soundButton;
 uwuButton.initialize(100, 50, "UwU", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, tmpSurf, mainFont, m_renderer);
 playButton.initialize(SCREEN_WIDTH - 250, SCREEN_HEIGHT -300, "Play", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, tmpSurf, mainFont, m_renderer);
 soundButton.initialize(SCREEN_WIDTH - 250, SCREEN_HEIGHT -200 , "Sound", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, tmpSurf, mainFont, m_renderer);
 exitButton.initialize(SCREEN_WIDTH - 250, SCREEN_HEIGHT -100, "Exit", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, tmpSurf, mainFont, m_renderer);
+#pragma endregion
 
 SDL_FreeSurface(tmpSurf);
 TTF_CloseFont(mainFont);
@@ -75,7 +80,7 @@ Mix_PlayMusic(bgMusic, -1); // Nümero de veces qüe se reprodüce. -1 es ün bücle 
 bool isRunning = true;
 bool clickUp = false;
 bool clickDown = false;
-button *pressedButton = nullptr;
+Button *pressedButton = nullptr;
 bool invalidPress = false;
 mouseController mainMouse;
 SDL_Event event;
