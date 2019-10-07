@@ -1,5 +1,6 @@
 #pragma once
 #include "Interactible.h"
+
 struct mouseController {
 	int x, y;
 	bool press;

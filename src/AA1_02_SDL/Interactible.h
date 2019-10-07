@@ -1,6 +1,6 @@
 #pragma once
-#include "GraphicUtils.h"
-
+#include "graphLibUtils.h"
+#include <string>
 
 class Interactible
 {
