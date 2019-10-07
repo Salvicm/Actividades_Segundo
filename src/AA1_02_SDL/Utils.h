@@ -6,3 +6,4 @@ struct mouseController {
 	Interactible *pressingButton = nullptr;
 	mouseController() : x(0), y(0), press(false){};
 };
+

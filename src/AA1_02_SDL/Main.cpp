@@ -1,7 +1,6 @@
 #include <exception>
-#include <iostream>
 #include "Constantes.h"
-
+#include <iostream>
 #include "utils.h"
 
 
