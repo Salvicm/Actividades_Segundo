@@ -1,7 +1,8 @@
 #include <exception>
 #include <iostream>
-#include "utils.h"
 #include "Constantes.h"
+
+#include "utils.h"
 
 
 int main(int, char*[]) {

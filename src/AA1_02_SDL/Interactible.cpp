@@ -15,9 +15,9 @@ void Interactible::initialize(int _xPos, int _yPos, const char * _text, SDL_Colo
 	texture = hover = { SDL_CreateTextureFromSurface(renderer, tmpSurface) };
 	tmpSurface = { TTF_RenderText_Blended(font, _text, _noHover) };
 	noHover = { SDL_CreateTextureFromSurface(renderer, tmpSurface) };
-
-	rect = { _xPos, _yPos, tmpSurface->w, tmpSurface->h };
-}
+	xSize = rect.w;
+	ySize = rect.h;
+ }
 /// With three colours the clicked is included
 void Interactible::initialize(int _xPos, int _yPos, const char * _text, SDL_Color _clicked, SDL_Color _hover, SDL_Color _noHover, SDL_Surface * tmpSurface, TTF_Font * font, SDL_Renderer * renderer)
 {
@@ -28,6 +28,8 @@ void Interactible::initialize(int _xPos, int _yPos, const char * _text, SDL_Colo
 	tmpSurface = { TTF_RenderText_Blended(font, _text, _clicked) };
 	clickedText = { SDL_CreateTextureFromSurface(renderer, tmpSurface) };
 	rect = { _xPos, _yPos, tmpSurface->w, tmpSurface->h };
+	xSize = rect.w;
+	ySize = rect.h;
 }
 
 bool Interactible::checkClick(int mouseX, int mouseY, bool clickUp, bool clickDown, Interactible **pressedButton, bool invalidPress)
@@ -38,11 +40,13 @@ bool Interactible::checkClick(int mouseX, int mouseY, bool clickUp, bool clickDo
 		if (mouseY >= rect.y && mouseY <= rect.y + rect.h) {
 			// Then texture is hover version
 			texture = hover;
+
 			// If you click
 			if (invalidPress ==  false) {
 				if (clickDown == true && clickUp == false && (*pressedButton == nullptr || *pressedButton == this)) {
 					if (clickedText != nullptr) {
 						texture = clickedText;
+					
 					}
 					*pressedButton = this;
 				}
@@ -63,6 +67,7 @@ bool Interactible::checkClick(int mouseX, int mouseY, bool clickUp, bool clickDo
 	}
 	else {
 		texture = noHover;
+
 		if (*pressedButton == this) {
 			*pressedButton = nullptr;
 		}
