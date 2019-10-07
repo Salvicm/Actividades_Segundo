@@ -56,7 +56,7 @@ SDL_Surface *tmpSurf = nullptr;
 #pragma endregion
 //Button initialization
 #pragma region "Button Initialization"
-Button uwuButton, playButton, exitButton, soundButton;
+Interactible uwuButton, playButton, exitButton, soundButton;
 uwuButton.initialize(100, 50, "UwU", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, tmpSurf, mainFont, m_renderer);
 playButton.initialize(SCREEN_WIDTH - 250, SCREEN_HEIGHT -300, "Play", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, tmpSurf, mainFont, m_renderer);
 soundButton.initialize(SCREEN_WIDTH - 250, SCREEN_HEIGHT -200 , "Sound", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, tmpSurf, mainFont, m_renderer);
@@ -80,7 +80,7 @@ Mix_PlayMusic(bgMusic, -1); // Nümero de veces qüe se reprodüce. -1 es ün bücle 
 bool isRunning = true;
 bool clickUp = false;
 bool clickDown = false;
-Button *pressedButton = nullptr;
+Interactible *pressedButton = nullptr;
 bool invalidPress = false;
 mouseController mainMouse;
 SDL_Event event;

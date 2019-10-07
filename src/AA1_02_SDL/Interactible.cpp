@@ -1,15 +1,15 @@
-#include "Button.h"
+#include "Interactible.h"
 
 
-Button::Button()
+Interactible::Interactible()
 {
 }
 
-Button::~Button()
+Interactible::~Interactible()
 {
 }
 
-void Button::initialize(int _xPos, int _yPos, const char * _text, SDL_Color _hover, SDL_Color _noHover, SDL_Surface * tmpSurface, TTF_Font * font, SDL_Renderer * renderer)
+void Interactible::initialize(int _xPos, int _yPos, const char * _text, SDL_Color _hover, SDL_Color _noHover, SDL_Surface * tmpSurface, TTF_Font * font, SDL_Renderer * renderer)
 {
 	tmpSurface = { TTF_RenderText_Blended(font, _text, _hover) };
 	texture = hover = { SDL_CreateTextureFromSurface(renderer, tmpSurface) };
@@ -19,7 +19,7 @@ void Button::initialize(int _xPos, int _yPos, const char * _text, SDL_Color _hov
 	rect = { _xPos, _yPos, tmpSurface->w, tmpSurface->h };
 }
 /// With three colours the clicked is included
-void Button::initialize(int _xPos, int _yPos, const char * _text, SDL_Color _clicked, SDL_Color _hover, SDL_Color _noHover, SDL_Surface * tmpSurface, TTF_Font * font, SDL_Renderer * renderer)
+void Interactible::initialize(int _xPos, int _yPos, const char * _text, SDL_Color _clicked, SDL_Color _hover, SDL_Color _noHover, SDL_Surface * tmpSurface, TTF_Font * font, SDL_Renderer * renderer)
 {
 	tmpSurface = { TTF_RenderText_Blended(font, _text, _hover) };
 	texture = hover = { SDL_CreateTextureFromSurface(renderer, tmpSurface) };
@@ -30,7 +30,7 @@ void Button::initialize(int _xPos, int _yPos, const char * _text, SDL_Color _cli
 	rect = { _xPos, _yPos, tmpSurface->w, tmpSurface->h };
 }
 
-bool Button::checkClick(int mouseX, int mouseY, bool clickUp, bool clickDown, Button **pressedButton, bool invalidPress)
+bool Interactible::checkClick(int mouseX, int mouseY, bool clickUp, bool clickDown, Interactible **pressedButton, bool invalidPress)
 {
 	//IF inside X
 	if (mouseX >= rect.x && mouseX <= rect.x + rect.w) {
@@ -71,7 +71,7 @@ bool Button::checkClick(int mouseX, int mouseY, bool clickUp, bool clickDown, Bu
 }
 
 
-void Button::destroyMyself()
+void Interactible::destroyMyself()
 {
 	SDL_DestroyTexture(texture);
 	SDL_DestroyTexture(hover);
