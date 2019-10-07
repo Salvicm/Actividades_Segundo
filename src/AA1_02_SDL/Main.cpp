@@ -45,7 +45,7 @@ SDL_Rect playerRect{ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 175,96 };
 //-->Animated Sprite ---
 
 // --- TEXT ---
-#pragma region font_nits
+#pragma region font_Inits
 TTF_Font *mainFont{ TTF_OpenFont("../../res/ttf/saiyan.ttf", 80) };
 if (mainFont == nullptr)
 throw "No es pot inicialitzar the TTF_FONT";
