@@ -52,7 +52,6 @@ int main(int, char*[]) {
 	bgMusic.play(-1);
 
 
-#pragma region MouseEvent
 	bool isRunning = true;
 	bool clickUp = false;
 	bool clickDown = false;
@@ -61,6 +60,7 @@ int main(int, char*[]) {
 	mouseController mainMouse;
 	SDL_Event event;
 	while (isRunning) {
+#pragma region MouseEvent
 		while (SDL_PollEvent(&event)) {
 			switch (event.type) {
 			case SDL_MOUSEMOTION:
@@ -91,43 +91,43 @@ int main(int, char*[]) {
 		}
 #pragma endregion
 
-	// Update
-	playerTexture.rect.x += ((mainMouse.x - playerTexture.rect.w / 2) - playerTexture.rect.x) / 10;
-	playerTexture.rect.y += ((mainMouse.y - playerTexture.rect.h / 2) - playerTexture.rect.y) / 10;
+		// Update
+		playerTexture.rect.x += ((mainMouse.x - playerTexture.rect.w / 2) - playerTexture.rect.x) / 10;
+		playerTexture.rect.y += ((mainMouse.y - playerTexture.rect.h / 2) - playerTexture.rect.y) / 10;
 	
 
-	if (uwuButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton, invalidPress)) {
-		std::cout << "Holaaaa\n";
-	}
-	if (playButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton, invalidPress)){
-	}
-	if (exitButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton, invalidPress)){
-		isRunning = false;
-	}
-	if (soundButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton, invalidPress)){
-		if (Mix_PausedMusic() == false)
-			Mix_PauseMusic();
-		else
-			Mix_ResumeMusic();
-	}
+		if (uwuButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton, invalidPress)) {
+			std::cout << "Holaaaa\n";
+		}
+		if (playButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton, invalidPress)){
+		}
+		if (exitButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton, invalidPress)){
+			isRunning = false;
+		}
+		if (soundButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton, invalidPress)){
+			if (Mix_PausedMusic() == false)
+				Mix_PauseMusic();
+			else
+				Mix_ResumeMusic();
+		}
 
-	if (clickDown == true && clickUp == false && pressedButton == nullptr) {
-		invalidPress = true;
-	}else if (clickDown == false && clickUp == true) {
-		pressedButton = nullptr;
-		invalidPress = false;
-	}
+		if (clickDown == true && clickUp == false && pressedButton == nullptr) {
+			invalidPress = true;
+		}else if (clickDown == false && clickUp == true) {
+			pressedButton = nullptr;
+			invalidPress = false;
+		}
 
-		// Draw
-		SDL_RenderClear(m_renderer);
-		SDL_RenderCopy(m_renderer, bgText.texture, nullptr, &bgText.rect);
-		SDL_RenderCopy(m_renderer, playerTexture.texture, nullptr, &playerTexture.rect);
-		SDL_RenderCopy(m_renderer, uwuButton.texture, nullptr, &uwuButton.rect);
-		SDL_RenderCopy(m_renderer, playButton.texture, nullptr, &playButton.rect);
-		SDL_RenderCopy(m_renderer, exitButton.texture, nullptr, &exitButton.rect);
-		SDL_RenderCopy(m_renderer, soundButton.texture, nullptr, &soundButton.rect);
+			// Draw
+			SDL_RenderClear(m_renderer);
+			SDL_RenderCopy(m_renderer, bgText.texture, nullptr, &bgText.rect);
+			SDL_RenderCopy(m_renderer, playerTexture.texture, nullptr, &playerTexture.rect);
+			SDL_RenderCopy(m_renderer, uwuButton.texture, nullptr, &uwuButton.rect);
+			SDL_RenderCopy(m_renderer, playButton.texture, nullptr, &playButton.rect);
+			SDL_RenderCopy(m_renderer, exitButton.texture, nullptr, &exitButton.rect);
+			SDL_RenderCopy(m_renderer, soundButton.texture, nullptr, &soundButton.rect);
 		
-		SDL_RenderPresent(m_renderer);
+			SDL_RenderPresent(m_renderer);
 	}
 	
 	// Destroy
