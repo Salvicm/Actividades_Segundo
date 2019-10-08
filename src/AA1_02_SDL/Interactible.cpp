@@ -10,9 +10,9 @@ Interactible::~Interactible()
 {
 }
 
-void Interactible::initialize(int _xPos, int _yPos, const char * _text, SDL_Color _hover, SDL_Color _noHover, SDL_Surface * tmpSurface, TTF_Font * font, SDL_Renderer * renderer)
+void Interactible::initialize(int _xPos, int _yPos, const char * _text, SDL_Color _hover, SDL_Color _noHover, TTF_Font * font, SDL_Renderer * renderer)
 {
-	tmpSurface = { TTF_RenderText_Blended(font, _text, _hover) };
+	SDL_Surface *tmpSurface = { TTF_RenderText_Blended(font, _text, _hover) };
 	texture = hover = { SDL_CreateTextureFromSurface(renderer, tmpSurface) };
 	tmpSurface = { TTF_RenderText_Blended(font, _text, _noHover) };
 	noHover = { SDL_CreateTextureFromSurface(renderer, tmpSurface) };
@@ -21,11 +21,13 @@ void Interactible::initialize(int _xPos, int _yPos, const char * _text, SDL_Colo
 	ySize = rect.h;
 	posX = _xPos;
 	posY = _yPos;
+	SDL_FreeSurface(tmpSurface);
+
  }
 /// With three colours the clicked is included
-void Interactible::initialize(int _xPos, int _yPos, const char * _text, SDL_Color _clicked, SDL_Color _hover, SDL_Color _noHover, SDL_Surface * tmpSurface, TTF_Font * font, SDL_Renderer * renderer)
+void Interactible::initialize(int _xPos, int _yPos, const char * _text, SDL_Color _clicked, SDL_Color _hover, SDL_Color _noHover,  TTF_Font * font, SDL_Renderer * renderer)
 {
-	tmpSurface = { TTF_RenderText_Blended(font, _text, _hover) };
+	SDL_Surface *tmpSurface = { TTF_RenderText_Blended(font, _text, _hover) };
 	texture = hover = { SDL_CreateTextureFromSurface(renderer, tmpSurface) };
 	tmpSurface = { TTF_RenderText_Blended(font, _text, _noHover) };
 	noHover = { SDL_CreateTextureFromSurface(renderer, tmpSurface) };
@@ -36,6 +38,8 @@ void Interactible::initialize(int _xPos, int _yPos, const char * _text, SDL_Colo
 	ySize = rect.h;
 	posX = _xPos;
 	posY = _yPos;
+	SDL_FreeSurface(tmpSurface);
+
 }
 
 bool Interactible::checkClick(int mouseX, int mouseY, bool clickUp, bool clickDown, Interactible **pressedButton, bool invalidPress)

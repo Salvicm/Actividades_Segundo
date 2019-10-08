@@ -31,18 +31,18 @@ int main(int, char*[]) {
 	TTF_Font *subFont{ TTF_OpenFont("../../res/ttf/arial.ttf", 80) };
 	if (mainFont == nullptr)
 	throw "No es pot inicialitzar the TTF_FONT";
-	SDL_Surface *tmpSurf = nullptr;
 	#pragma endregion
 	//Button initialization
 	#pragma region "Button Initialization"
-	Interactible uwuButton, playButton, exitButton, soundButton;
-	uwuButton.initialize(100, 50, "UwU", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, tmpSurf, mainFont, m_renderer);
-	playButton.initialize(SCREEN_WIDTH - 250, SCREEN_HEIGHT -300, "Play", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, tmpSurf, mainFont, m_renderer);
-	soundButton.initialize(SCREEN_WIDTH - 250, SCREEN_HEIGHT -200 , "Sound", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, tmpSurf, mainFont, m_renderer);
-	exitButton.initialize(SCREEN_WIDTH - 250, SCREEN_HEIGHT -100, "Exit", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, tmpSurf, mainFont, m_renderer);
+
+	Interactible titleButton, playButton, exitButton, soundButton;
+	// TODO  Hacer simplemente que creas las texturas en cuestión y las pasas como parámetros por referéncia, de ese modo evitas el utilizar SDL
+	titleButton.initialize(100, 50, "SDL", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 },  mainFont, m_renderer);
+	playButton.initialize(SCREEN_WIDTH - 250, SCREEN_HEIGHT -300, "Play", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, mainFont, m_renderer);
+	soundButton.initialize(SCREEN_WIDTH - 250, SCREEN_HEIGHT -200 , "Sound", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 },  mainFont, m_renderer);
+	exitButton.initialize(SCREEN_WIDTH - 250, SCREEN_HEIGHT -100, "Exit", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, mainFont, m_renderer);
 	#pragma endregion
 
-	SDL_FreeSurface(tmpSurf);
 	TTF_CloseFont(mainFont);
 	TTF_CloseFont(subFont);
 
@@ -55,10 +55,12 @@ int main(int, char*[]) {
 	bool isRunning = true;
 	bool clickUp = false;
 	bool clickDown = false;
+	bool esc = false; 
 	Interactible *pressedButton = nullptr;
 	bool invalidPress = false;
 	mouseController mainMouse;
 	SDL_Event event;
+
 	while (isRunning) {
 #pragma region MouseEvent
 		while (SDL_PollEvent(&event)) {
@@ -74,7 +76,7 @@ int main(int, char*[]) {
 
 			case SDL_KEYDOWN: // SOLDADO CAIDO, REPITO: SOLDADO CAÍDO
 				if (event.key.keysym.sym == SDLK_ESCAPE) {
-					isRunning = false;
+					esc = true;
 				}
 				break;
 			case SDL_MOUSEBUTTONDOWN:
@@ -92,11 +94,15 @@ int main(int, char*[]) {
 #pragma endregion
 
 		// Update
+		if (esc == true ) {
+			isRunning =  false;
+			esc = false;
+		}
 		playerTexture.rect.x += ((mainMouse.x - playerTexture.rect.w / 2) - playerTexture.rect.x) / 10;
 		playerTexture.rect.y += ((mainMouse.y - playerTexture.rect.h / 2) - playerTexture.rect.y) / 10;
 	
 
-		if (uwuButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton, invalidPress)) {
+		if (titleButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton, invalidPress)) {
 			std::cout << "Holaaaa\n";
 		}
 		if (playButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton, invalidPress)){
@@ -122,7 +128,7 @@ int main(int, char*[]) {
 			SDL_RenderClear(m_renderer);
 			SDL_RenderCopy(m_renderer, bgText.texture, nullptr, &bgText.rect);
 			SDL_RenderCopy(m_renderer, playerTexture.texture, nullptr, &playerTexture.rect);
-			SDL_RenderCopy(m_renderer, uwuButton.texture, nullptr, &uwuButton.rect);
+			SDL_RenderCopy(m_renderer, titleButton.texture, nullptr, &titleButton.rect);
 			SDL_RenderCopy(m_renderer, playButton.texture, nullptr, &playButton.rect);
 			SDL_RenderCopy(m_renderer, exitButton.texture, nullptr, &exitButton.rect);
 			SDL_RenderCopy(m_renderer, soundButton.texture, nullptr, &soundButton.rect);
@@ -133,7 +139,7 @@ int main(int, char*[]) {
 	// Destroy
 	bgText.destroy();
 	playerTexture.destroy();
-	uwuButton.destroyMyself();
+	titleButton.destroyMyself();
 	playButton.destroyMyself();
 	exitButton.destroyMyself();
 	soundButton.destroyMyself();
