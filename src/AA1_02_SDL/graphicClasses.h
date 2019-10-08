@@ -22,4 +22,11 @@ public:
 	Mix_Music *track;
 
 };
+class Surface {
+public:
+	Surface();
+	~Surface();
+	void free();
+	SDL_Surface *surface;
+};
 

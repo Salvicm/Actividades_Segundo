@@ -43,3 +43,16 @@ void Audio::play(int _numberOfTimes)
 	Mix_PlayMusic(track, _numberOfTimes); // Nümero de veces qüe se reprodüce. -1 es ün bücle infinito
 
 }
+
+Surface::Surface()
+{
+}
+
+Surface::~Surface()
+{
+}
+
+void Surface::free()
+{
+	SDL_FreeSurface(surface);
+}

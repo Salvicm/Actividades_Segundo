@@ -1,12 +1,13 @@
 #include <exception>
 #include <iostream>
-#include "utils.h"
+#include "Utils.h"
 #include "Interactible.h"
 #include "graphicClasses.h"
 
 int main(int, char*[]) {
-	
+
 	// inits
+	keyboardInputs keyInputs;
 	graphicHelper::initLibrary();
 	// Window/Renderer
 	SDL_Renderer *m_renderer;
@@ -16,7 +17,7 @@ int main(int, char*[]) {
 	// --- SPRITES ---
 
 	//Background
-	Texture bgText(&m_renderer, "../../res/img/bg.jpg",  0, 0,  SCREEN_WIDTH,SCREEN_HEIGHT);
+	Texture bgText(&m_renderer, "../../res/img/bg.jpg",  0, 0,  SCREEN_WIDTH, SCREEN_HEIGHT);
 	Texture playerTexture(&m_renderer, "../../res/img/kintoun.png", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 175, 96);
 	// Cursor
 
@@ -35,14 +36,15 @@ int main(int, char*[]) {
 	//Button initialization
 	#pragma region "Button Initialization"
 
+	Surface tmpSurf;
 	Interactible titleButton, playButton, exitButton, soundButton;
-	// TODO  Hacer simplemente que creas las texturas en cuestión y las pasas como parámetros por referéncia, de ese modo evitas el utilizar SDL
-	titleButton.initialize(100, 50, "SDL", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 },  mainFont, m_renderer);
-	playButton.initialize(SCREEN_WIDTH - 250, SCREEN_HEIGHT -300, "Play", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, mainFont, m_renderer);
-	soundButton.initialize(SCREEN_WIDTH - 250, SCREEN_HEIGHT -200 , "Sound", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 },  mainFont, m_renderer);
-	exitButton.initialize(SCREEN_WIDTH - 250, SCREEN_HEIGHT -100, "Exit", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, mainFont, m_renderer);
+	// TODO  Hacer simplemente que creas las texturas en cuestión y las pasas como parámetros por referéncia, de ese modo evitas el utilizar SDL ??
+	titleButton.initialize(100, 50, "SDL", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, tmpSurf.surface,  mainFont, m_renderer);
+	playButton.initialize(SCREEN_WIDTH - 250, SCREEN_HEIGHT -300, "Play", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, tmpSurf.surface, mainFont, m_renderer);
+	soundButton.initialize(SCREEN_WIDTH - 250, SCREEN_HEIGHT -200 , "Sound", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, tmpSurf.surface, mainFont, m_renderer);
+	exitButton.initialize(SCREEN_WIDTH - 250, SCREEN_HEIGHT -100, "Exit", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, tmpSurf.surface, mainFont, m_renderer);
 	#pragma endregion
-
+	tmpSurf.free();
 	TTF_CloseFont(mainFont);
 	TTF_CloseFont(subFont);
 
@@ -74,17 +76,17 @@ int main(int, char*[]) {
 				isRunning = false;
 				break;
 
-			case SDL_KEYDOWN: // SOLDADO CAIDO, REPITO: SOLDADO CAÍDO
+			case SDL_KEYDOWN: 
 				if (event.key.keysym.sym == SDLK_ESCAPE) {
-					esc = true;
+					keyInputs.ESC_KEY = true;
 				}
 				break;
 			case SDL_MOUSEBUTTONDOWN:
-				mainMouse.press = clickDown = true;
+				clickDown = true;
 				clickUp = false;
 				break;
 			case SDL_MOUSEBUTTONUP:
-				mainMouse.press = clickDown = false;
+				clickDown = false;
 				clickUp = true;
 				break;
 			default:
@@ -94,9 +96,8 @@ int main(int, char*[]) {
 #pragma endregion
 
 		// Update
-		if (esc == true ) {
+		if (keyInputs.ESC_KEY == true ) {
 			isRunning =  false;
-			esc = false;
 		}
 		playerTexture.rect.x += ((mainMouse.x - playerTexture.rect.w / 2) - playerTexture.rect.x) / 10;
 		playerTexture.rect.y += ((mainMouse.y - playerTexture.rect.h / 2) - playerTexture.rect.y) / 10;
@@ -134,6 +135,7 @@ int main(int, char*[]) {
 			SDL_RenderCopy(m_renderer, soundButton.texture, nullptr, &soundButton.rect);
 		
 			SDL_RenderPresent(m_renderer);
+			keyInputs.clean();
 	}
 	
 	// Destroy
