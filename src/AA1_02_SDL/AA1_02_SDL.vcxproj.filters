@@ -21,6 +21,9 @@
     <ClCompile Include="Interactible.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="graphicClasses.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Constantes.h">
@@ -34,6 +37,9 @@
     </ClInclude>
     <ClInclude Include="graphLibUtils.h">
       <Filter>Archivos de origen</Filter>
+    </ClInclude>
+    <ClInclude Include="graphicClasses.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

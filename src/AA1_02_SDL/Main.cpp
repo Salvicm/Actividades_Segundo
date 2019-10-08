@@ -1,7 +1,8 @@
 #include <exception>
 #include <iostream>
 #include "utils.h"
-
+#include "Interactible.h"
+#include "graphicClasses.h"
 
 int main(int, char*[]) {
 	
@@ -15,13 +16,10 @@ int main(int, char*[]) {
 	// --- SPRITES ---
 
 	//Background
-	SDL_Texture* bgTexture{ IMG_LoadTexture(m_renderer, "../../res/img/bg.jpg") };
-	if (bgTexture == nullptr) throw "Error: bgTexture init";
-	SDL_Rect bgRect{ 0,0,SCREEN_WIDTH, SCREEN_HEIGHT };
+	Texture bgText(&m_renderer, "../../res/img/bg.jpg",  0, 0,  SCREEN_WIDTH,SCREEN_HEIGHT);
+	Texture playerTexture(&m_renderer, "../../res/img/kintoun.png", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 175, 96);
 	// Cursor
-	SDL_Texture *playerTexture{ IMG_LoadTexture(m_renderer, "../../res/img/kintoun.png") };
-	if (playerTexture == nullptr) throw "No s'han pogut crear les textures";
-	SDL_Rect playerRect{ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 175,96 };
+
 
 	//-->Animated Sprite ---
 
@@ -49,15 +47,12 @@ int main(int, char*[]) {
 	TTF_CloseFont(subFont);
 
 	// --- AUDIO ---
-	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1024) != 0)
-	throw "Unable to initialize SDL_mixer audio systems";
-
-	Mix_Music *bgMusic{ Mix_LoadMUS("../../res/au/mainTheme.mp3") };
-	if (!bgMusic) throw "Unable to load the Mix_Music soundtrack";
-	Mix_VolumeMusic(MIX_MAX_VOLUME  * 0.75); // Üsar porcentajes, nada de nümeros completos, por següridad de qüe cambie la librería
-	Mix_PlayMusic(bgMusic, -1); // Nümero de veces qüe se reprodüce. -1 es ün bücle infinito
+	
+	Audio bgMusic("../../res/au/mainTheme.mp3");
+	bgMusic.play(-1);
 
 
+#pragma region MouseEvent
 	bool isRunning = true;
 	bool clickUp = false;
 	bool clickDown = false;
@@ -94,63 +89,58 @@ int main(int, char*[]) {
 				break;
 			}
 		}
-		// Update
-	
-	
-		playerRect.x += ((mainMouse.x - playerRect.w / 2) - playerRect.x) / 10;
-		playerRect.y += ((mainMouse.y - playerRect.h / 2) - playerRect.y) / 10;
+#pragma endregion
+
+	// Update
+	playerTexture.rect.x += ((mainMouse.x - playerTexture.rect.w / 2) - playerTexture.rect.x) / 10;
+	playerTexture.rect.y += ((mainMouse.y - playerTexture.rect.h / 2) - playerTexture.rect.y) / 10;
 	
 
-		if (uwuButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton, invalidPress)) {
-			std::cout << "Holaaaa\n";
-		}
-		if (playButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton, invalidPress)){
-		}
-		if (exitButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton, invalidPress)){
-			isRunning = false;
-		}
-		if (soundButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton, invalidPress)){
-			if (Mix_PausedMusic() == false)
-				Mix_PauseMusic();
-			else
-				Mix_ResumeMusic();
-		}
+	if (uwuButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton, invalidPress)) {
+		std::cout << "Holaaaa\n";
+	}
+	if (playButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton, invalidPress)){
+	}
+	if (exitButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton, invalidPress)){
+		isRunning = false;
+	}
+	if (soundButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton, invalidPress)){
+		if (Mix_PausedMusic() == false)
+			Mix_PauseMusic();
+		else
+			Mix_ResumeMusic();
+	}
 
-		if (clickDown == true && clickUp == false && pressedButton == nullptr) {
-			invalidPress = true;
-		}else if (clickDown == false && clickUp == true) {
-			pressedButton = nullptr;
-			invalidPress = false;
-		}
+	if (clickDown == true && clickUp == false && pressedButton == nullptr) {
+		invalidPress = true;
+	}else if (clickDown == false && clickUp == true) {
+		pressedButton = nullptr;
+		invalidPress = false;
+	}
 
-			// Draw
-			SDL_RenderClear(m_renderer);
-			SDL_RenderCopy(m_renderer, bgTexture, nullptr, &bgRect);
-			SDL_RenderCopy(m_renderer, playerTexture, nullptr, &playerRect);
-			SDL_RenderCopy(m_renderer, uwuButton.texture, nullptr, &uwuButton.rect);
-			SDL_RenderCopy(m_renderer, playButton.texture, nullptr, &playButton.rect);
-			SDL_RenderCopy(m_renderer, exitButton.texture, nullptr, &exitButton.rect);
-			SDL_RenderCopy(m_renderer, soundButton.texture, nullptr, &soundButton.rect);
+		// Draw
+		SDL_RenderClear(m_renderer);
+		SDL_RenderCopy(m_renderer, bgText.texture, nullptr, &bgText.rect);
+		SDL_RenderCopy(m_renderer, playerTexture.texture, nullptr, &playerTexture.rect);
+		SDL_RenderCopy(m_renderer, uwuButton.texture, nullptr, &uwuButton.rect);
+		SDL_RenderCopy(m_renderer, playButton.texture, nullptr, &playButton.rect);
+		SDL_RenderCopy(m_renderer, exitButton.texture, nullptr, &exitButton.rect);
+		SDL_RenderCopy(m_renderer, soundButton.texture, nullptr, &soundButton.rect);
 		
-			SDL_RenderPresent(m_renderer);
-		}
+		SDL_RenderPresent(m_renderer);
+	}
 	
-		// Destroy
-		SDL_DestroyTexture(bgTexture);
-		SDL_DestroyTexture(playerTexture);
-		uwuButton.destroyMyself();
-		playButton.destroyMyself();
-		exitButton.destroyMyself();
-		soundButton.destroyMyself();
+	// Destroy
+	bgText.destroy();
+	playerTexture.destroy();
+	uwuButton.destroyMyself();
+	playButton.destroyMyself();
+	exitButton.destroyMyself();
+	soundButton.destroyMyself();
 
+		
 
-		SDL_DestroyRenderer(m_renderer);
-		SDL_DestroyWindow(m_window);
-		// Quits
-		Mix_CloseAudio();
-		IMG_Quit();
-		TTF_Quit();
-		Mix_Quit();
-		SDL_Quit();
-		return 0;
+	// Quits
+	graphicHelper::closeEverything(m_renderer, m_window);
+	return 0;
 }

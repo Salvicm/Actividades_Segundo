@@ -166,11 +166,13 @@
   <ItemGroup>
     <ClCompile Include="Interactible.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="graphicClasses.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="graphLibUtils.h" />
     <ClInclude Include="Interactible.h" />
     <ClInclude Include="Constantes.h" />
+    <ClInclude Include="graphicClasses.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

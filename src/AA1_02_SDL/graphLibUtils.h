@@ -23,6 +23,9 @@ namespace graphicHelper {
 		if (!(Mix_Init(mixFlags) & mixFlags)) {
 			throw "Error: SDL_mixer init";
 		}
+		if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1024) != 0)
+			throw "Unable to initialize SDL_mixer audio systems";
+		Mix_VolumeMusic(MIX_MAX_VOLUME  * 0.75); // Üsar porcentajes, nada de nümeros completos, por següridad de qüe cambie la librería
 	}
 
 	static void startWindowAndRender(SDL_Window **m_window, SDL_Renderer **m_renderer) {
@@ -34,5 +37,14 @@ namespace graphicHelper {
 		if (m_renderer == nullptr) {
 			throw "Unable to create renderer";
 		}
+	}
+	static void closeEverything(SDL_Renderer *m_renderer, SDL_Window *m_window) {
+		SDL_DestroyRenderer(m_renderer);
+		SDL_DestroyWindow(m_window);
+		Mix_CloseAudio();
+		IMG_Quit();
+		TTF_Quit();
+		Mix_Quit();
+		SDL_Quit();
 	}
 }
