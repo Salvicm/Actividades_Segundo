@@ -68,8 +68,8 @@ int main(int, char*[]) {
 		while (SDL_PollEvent(&event)) {
 			switch (event.type) {
 			case SDL_MOUSEMOTION:
-				mainMouse.x = event.motion.x;
-				mainMouse.y = event.motion.y;
+				mainMouse.position.x = event.motion.x;
+				mainMouse.position.y = event.motion.y;
 				break;
 
 			case SDL_QUIT:
@@ -99,24 +99,29 @@ int main(int, char*[]) {
 		if (keyInputs.ESC_KEY == true ) {
 			isRunning =  false;
 		}
-		playerTexture.rect.x += ((mainMouse.x - playerTexture.rect.w / 2) - playerTexture.rect.x) / 10;
-		playerTexture.rect.y += ((mainMouse.y - playerTexture.rect.h / 2) - playerTexture.rect.y) / 10;
+		playerTexture.rect.x += ((mainMouse.position.x - playerTexture.rect.w / 2) - playerTexture.rect.x) / 10;
+		playerTexture.rect.y += ((mainMouse.position.y - playerTexture.rect.h / 2) - playerTexture.rect.y) / 10;
 	
+		if (checkMouseColision(mainMouse.position, titleButton.rect)) {
+			titleButton.hovering = true;
+			if (titleButton.checkClick(clickUp, clickDown, &pressedButton, invalidPress)) {
+				std::cout << "Holaaaa\n";
 
-		if (titleButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton, invalidPress)) {
-			std::cout << "Holaaaa\n";
+			}
 		}
-		if (playButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton, invalidPress)){
+		else titleButton.hovering = false;
+		
+		/*if (playButton.checkClick(mainMouse.position, clickUp, clickDown, &pressedButton, invalidPress)){
 		}
-		if (exitButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton, invalidPress)){
+		if (exitButton.checkClick(mainMouse.position, clickUp, clickDown, &pressedButton, invalidPress)){
 			isRunning = false;
 		}
-		if (soundButton.checkClick(mainMouse.x, mainMouse.y, clickUp, clickDown, &pressedButton, invalidPress)){
+		if (soundButton.checkClick(mainMouse.position, clickUp, clickDown, &pressedButton, invalidPress)){
 			if (Mix_PausedMusic() == false)
 				Mix_PauseMusic();
 			else
 				Mix_ResumeMusic();
-		}
+		}*/
 
 		if (clickDown == true && clickUp == false && pressedButton == nullptr) {
 			invalidPress = true;
@@ -127,12 +132,12 @@ int main(int, char*[]) {
 
 			// Draw
 			SDL_RenderClear(m_renderer);
-			SDL_RenderCopy(m_renderer, bgText.texture, nullptr, &bgText.rect);
-			SDL_RenderCopy(m_renderer, playerTexture.texture, nullptr, &playerTexture.rect);
-			SDL_RenderCopy(m_renderer, titleButton.texture, nullptr, &titleButton.rect);
-			SDL_RenderCopy(m_renderer, playButton.texture, nullptr, &playButton.rect);
-			SDL_RenderCopy(m_renderer, exitButton.texture, nullptr, &exitButton.rect);
-			SDL_RenderCopy(m_renderer, soundButton.texture, nullptr, &soundButton.rect);
+			SDL_RenderCopy(m_renderer, bgText.texture, nullptr, &bgText.rectsdl);
+			SDL_RenderCopy(m_renderer, playerTexture.texture, nullptr, &playerTexture.rectsdl);
+			SDL_RenderCopy(m_renderer, titleButton.texture, nullptr, &titleButton.rectsdl);
+			SDL_RenderCopy(m_renderer, playButton.texture, nullptr, &playButton.rectsdl);
+			SDL_RenderCopy(m_renderer, exitButton.texture, nullptr, &exitButton.rectsdl);
+			SDL_RenderCopy(m_renderer, soundButton.texture, nullptr, &soundButton.rectsdl);
 		
 			SDL_RenderPresent(m_renderer);
 			keyInputs.clean();
@@ -147,7 +152,6 @@ int main(int, char*[]) {
 	soundButton.destroyMyself();
 
 		
-
 	// Quits
 	graphicHelper::closeEverything(m_renderer, m_window);
 	return 0;

@@ -10,7 +10,8 @@ Texture::Texture(SDL_Renderer **m_renderer, const char *_path, int _posX, int _p
 { 
 	texture = { IMG_LoadTexture(*m_renderer, _path) };
 	if (texture == nullptr) throw "Error: Texture init";
-	rect = { _posX, _posY, _xSize, _ySize};
+	rectsdl = { _posX, _posY, _xSize, _ySize};
+	rect = { _posX, _posY, _xSize, _ySize };
 }
 
 

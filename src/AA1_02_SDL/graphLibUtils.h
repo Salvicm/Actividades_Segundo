@@ -47,4 +47,5 @@ namespace graphicHelper {
 		Mix_Quit();
 		SDL_Quit();
 	}
+	
 }
