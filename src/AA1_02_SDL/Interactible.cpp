@@ -1,4 +1,3 @@
-#include "graphLibUtils.h"
 #include "Interactible.h"
 
 
@@ -12,6 +11,7 @@ Interactible::~Interactible()
 
 void Interactible::initialize(int _xPos, int _yPos, const char * _text, SDL_Color _hover, SDL_Color _noHover, SDL_Surface * tmpSurface, TTF_Font * font, SDL_Renderer * renderer)
 {
+	name = _text;
 	tmpSurface = { TTF_RenderText_Blended(font, _text, _hover) };
 	texture = hover = { SDL_CreateTextureFromSurface(renderer, tmpSurface) };
 	tmpSurface = { TTF_RenderText_Blended(font, _text, _noHover) };
@@ -42,35 +42,27 @@ void Interactible::initialize(int _xPos, int _yPos, const char * _text, SDL_Colo
 	position.y = _yPos;
 }
 
-bool Interactible::checkClick(bool clickUp, bool clickDown, Interactible **pressedButton, bool invalidPress)
+bool Interactible::checkClick(mouseController *mouse, bool invalidPress)
 {
 		texture = hover;
 		this->lerpSize();
 	if (hovering == true) {
 		if (invalidPress == false) {
-			if (clickDown == true && clickUp == false && (*pressedButton == nullptr || *pressedButton == this)) {
+			if (mouse->pressDown == true && mouse->pressUp == false && (mouse->pressedButton == NO_BUTTON || mouse->pressedButton == this->name)) {
 				if (clickedText != nullptr) {
 					texture = clickedText;
 				}
-				*pressedButton = this;
+				mouse->pressedButton = this->name;
 			}
 			// If you stop clicking inside the Button
-			else if (clickDown == false && clickUp == true && *pressedButton == this) {
-				*pressedButton = nullptr;
+			else if (mouse->pressDown == false && mouse->pressUp == true && mouse->pressedButton == this->name) {
+				mouse->pressedButton = NO_BUTTON;
 				return true;
 			}
 		}
 	}
 		//Needed for the case where you stop being on Y but not on X
 	else {
-		texture = noHover;
-		if (*pressedButton == this) {
-			*pressedButton = nullptr;
-			lerpSizeController = 0;
-			lerpController = true;
-		}
-		rectsdl.h = ySize;
-		rectsdl.w = xSize;
 	}
 	
 	
@@ -104,6 +96,20 @@ void Interactible::lerpSize()
 #pragma endregion
 	rectsdl.w = (xSize * (1.0 - lerpSizeController)) + (xSize*1.2 * lerpSizeController);
 	rectsdl.h = (ySize * (1.0 - lerpSizeController)) + (ySize*1.2 * lerpSizeController);
+	rectsdl.x = position.x - rectsdl.w / 2;
+	rectsdl.y = position.y - rectsdl.h / 2;
+}
+
+void Interactible::normalizeSize(mouseController *mouse)
+{
+	if (mouse->pressedButton == this->name) {
+		mouse->pressedButton = NO_BUTTON;
+		lerpSizeController = 0;
+		lerpController = true;
+	}
+	texture = noHover;
+	rectsdl.h = ySize;
+	rectsdl.w = xSize;
 	rectsdl.x = position.x - rectsdl.w / 2;
 	rectsdl.y = position.y - rectsdl.h / 2;
 }

@@ -3,8 +3,7 @@
 #include <SDL_ttf.h>
 #include <SDL_image.h> // Imagenes, faltaría SDL_ttf.h para fuentes y SDL_mixer.h para sonido
 #include <SDL_mixer.h>
-#include "Constantes.h"
-
+#include "Utils.h"
 namespace graphicHelper {
 	// Tienen que ser estáticas al no formar parte de un objeto?
 	static void initLibrary() {
@@ -25,7 +24,7 @@ namespace graphicHelper {
 		}
 		if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1024) != 0)
 			throw "Unable to initialize SDL_mixer audio systems";
-		Mix_VolumeMusic(MIX_MAX_VOLUME  * 0.75); // Üsar porcentajes, nada de nümeros completos, por següridad de qüe cambie la librería
+		Mix_VolumeMusic(MIX_MAX_VOLUME  * (MUSIC_VOL/100)); // Üsar porcentajes, nada de nümeros completos, por següridad de qüe cambie la librería
 	}
 
 	static void startWindowAndRender(SDL_Window **m_window, SDL_Renderer **m_renderer) {
@@ -47,5 +46,4 @@ namespace graphicHelper {
 		Mix_Quit();
 		SDL_Quit();
 	}
-	
 }

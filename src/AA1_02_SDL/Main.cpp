@@ -1,6 +1,5 @@
 #include <exception>
 #include <iostream>
-#include "Utils.h"
 #include "Interactible.h"
 #include "graphicClasses.h"
 
@@ -55,10 +54,7 @@ int main(int, char*[]) {
 
 
 	bool isRunning = true;
-	bool clickUp = false;
-	bool clickDown = false;
 	bool esc = false; 
-	Interactible *pressedButton = nullptr;
 	bool invalidPress = false;
 	mouseController mainMouse;
 	SDL_Event event;
@@ -82,12 +78,12 @@ int main(int, char*[]) {
 				}
 				break;
 			case SDL_MOUSEBUTTONDOWN:
-				clickDown = true;
-				clickUp = false;
+				mainMouse.pressDown = true;
+				mainMouse.pressUp = false;
 				break;
 			case SDL_MOUSEBUTTONUP:
-				clickDown = false;
-				clickUp = true;
+				mainMouse.pressDown = false;
+				mainMouse.pressUp = true;
 				break;
 			default:
 				break;
@@ -102,31 +98,41 @@ int main(int, char*[]) {
 		playerTexture.rect.x += ((mainMouse.position.x - playerTexture.rect.w / 2) - playerTexture.rect.x) / 10;
 		playerTexture.rect.y += ((mainMouse.position.y - playerTexture.rect.h / 2) - playerTexture.rect.y) / 10;
 	
-		if (checkMouseColision(mainMouse.position, titleButton.rect)) {
-			titleButton.hovering = true;
-			if (titleButton.checkClick(clickUp, clickDown, &pressedButton, invalidPress)) {
-				std::cout << "Holaaaa\n";
-
+		if (checkButtonColision(&mainMouse, &titleButton)) {
+			
+			if (titleButton.checkClick(&mainMouse, invalidPress)) {
+				std::cout << "Title Pressed\n";
 			}
 		}
-		else titleButton.hovering = false;
-		
-		/*if (playButton.checkClick(mainMouse.position, clickUp, clickDown, &pressedButton, invalidPress)){
-		}
-		if (exitButton.checkClick(mainMouse.position, clickUp, clickDown, &pressedButton, invalidPress)){
-			isRunning = false;
-		}
-		if (soundButton.checkClick(mainMouse.position, clickUp, clickDown, &pressedButton, invalidPress)){
-			if (Mix_PausedMusic() == false)
-				Mix_PauseMusic();
-			else
-				Mix_ResumeMusic();
-		}*/
+		if (checkButtonColision(&mainMouse, &playButton)) {
 
-		if (clickDown == true && clickUp == false && pressedButton == nullptr) {
+			if (playButton.checkClick(&mainMouse, invalidPress)) {
+				std::cout << "Works\n";
+			}
+		}
+		if (checkButtonColision(&mainMouse, &exitButton)) {
+
+			if (exitButton.checkClick(&mainMouse, invalidPress)) {
+				isRunning = false;
+			}
+		}
+		if (checkButtonColision(&mainMouse, &soundButton)) {
+
+			if (soundButton.checkClick(&mainMouse, invalidPress)) {
+				if (Mix_PausedMusic() == false) {
+					Mix_PauseMusic();
+				}
+				else {
+					Mix_ResumeMusic();
+				}
+			}
+		}
+
+
+		if (mainMouse.pressDown == true && mainMouse.pressUp == false && mainMouse.pressedButton == NO_BUTTON) {
 			invalidPress = true;
-		}else if (clickDown == false && clickUp == true) {
-			pressedButton = nullptr;
+		}else if (mainMouse.pressDown == false && mainMouse.pressUp == true) {
+			mainMouse.pressedButton = NO_BUTTON;
 			invalidPress = false;
 		}
 
