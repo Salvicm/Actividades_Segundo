@@ -18,9 +18,6 @@
     <ClCompile Include="Main.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Interactible.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="graphicClasses.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
@@ -30,9 +27,6 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Utils.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Interactible.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="graphLibUtils.h">
