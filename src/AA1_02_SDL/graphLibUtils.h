@@ -1,9 +1,7 @@
 #pragma once
-#include <SDL.h>		// Always needs to be included for an SDL app
-#include <SDL_ttf.h>
-#include <SDL_image.h> // Imagenes, faltaría SDL_ttf.h para fuentes y SDL_mixer.h para sonido
-#include <SDL_mixer.h>
-#include "Utils.h"
+
+#include "graphicClasses.h"
+
 namespace graphicHelper {
 	// Tienen que ser estáticas al no formar parte de un objeto?
 	static void initLibrary() {
@@ -24,18 +22,11 @@ namespace graphicHelper {
 		}
 		if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1024) != 0)
 			throw "Unable to initialize SDL_mixer audio systems";
-		Mix_VolumeMusic(MIX_MAX_VOLUME  * (MUSIC_VOL/100)); // Üsar porcentajes, nada de nümeros completos, por següridad de qüe cambie la librería
+		Mix_VolumeMusic(MIX_MAX_VOLUME  * MUSIC_VOL / 100); // Üsar porcentajes, nada de nümeros completos, por següridad de qüe cambie la librería
 	}
 
 	static void startWindowAndRender(SDL_Window **m_window, SDL_Renderer **m_renderer) {
-		*m_window = { SDL_CreateWindow("AA1_02_pt3...", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN) };
-		if (m_window == nullptr) {
-			throw "Unable to create window";
-		}
-		*m_renderer = { SDL_CreateRenderer(*m_window,-1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC) };
-		if (m_renderer == nullptr) {
-			throw "Unable to create renderer";
-		}
+		
 	}
 	static void closeEverything(SDL_Renderer *m_renderer, SDL_Window *m_window) {
 		SDL_DestroyRenderer(m_renderer);
@@ -46,4 +37,23 @@ namespace graphicHelper {
 		Mix_Quit();
 		SDL_Quit();
 	}
+
+	//TODO Make renderClear, renderCopy and renderPresent my own functions
+	static void renderClear(SDL_Renderer *m_renderer) {
+		SDL_RenderClear(m_renderer);
+	}
+	static void renderCopy(SDL_Renderer *m_renderer, Texture *texture) {
+		SDL_RenderCopy(m_renderer, texture->texture, nullptr, &texture->libRect);
+
+	}
+	static void renderCopy(SDL_Renderer *m_renderer, Interactible *texture) {
+		SDL_RenderCopy(m_renderer, texture->texture, nullptr, &texture->rectLib);
+
+	}
+	static void renderPresent(SDL_Renderer *m_renderer) {
+		SDL_RenderPresent(m_renderer); 
+
+	}
+
+
 }

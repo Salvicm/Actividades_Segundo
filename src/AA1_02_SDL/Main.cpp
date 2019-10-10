@@ -1,7 +1,6 @@
 #include <exception>
 #include <iostream>
-#include "Interactible.h"
-#include "graphicClasses.h"
+#include "graphLibUtils.h"
 
 int main(int, char*[]) {
 
@@ -9,9 +8,8 @@ int main(int, char*[]) {
 	keyboardInputs keyInputs;
 	graphicHelper::initLibrary();
 	// Window/Renderer
-	SDL_Renderer *m_renderer;
-	SDL_Window *m_window;
-	graphicHelper::startWindowAndRender(&m_window, &m_renderer);
+	Window m_window("My_first_SDL", SCREEN_WIDTH, SCREEN_HEIGHT);
+	Renderer m_renderer(&m_window);
 
 	// --- SPRITES ---
 
@@ -24,29 +22,21 @@ int main(int, char*[]) {
 	//-->Animated Sprite ---
 
 	// --- TEXT ---
-	#pragma region font_Inits
-	TTF_Font *mainFont{ TTF_OpenFont("../../res/ttf/saiyan.ttf", 80) };
-	if (mainFont == nullptr)
-	throw "No es pot inicialitzar the TTF_FONT";
-	TTF_Font *subFont{ TTF_OpenFont("../../res/ttf/arial.ttf", 80) };
-	if (mainFont == nullptr)
-	throw "No es pot inicialitzar the TTF_FONT";
-	#pragma endregion
+	Font mainFont("../../res/ttf/saiyan.ttf", 80);
+	Font subFont("../../res/ttf/arial.ttf", 80);
 	//Button initialization
-	#pragma region "Button Initialization"
 
 	Surface tmpSurf;
 	Interactible titleButton, playButton, exitButton, soundButton;
-	// TODO  Hacer simplemente que creas las texturas en cuestión y las pasas como parámetros por referéncia, de ese modo evitas el utilizar SDL ??
-	titleButton.initialize(100, 50, "SDL", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, tmpSurf.surface,  mainFont, m_renderer);
-	playButton.initialize(SCREEN_WIDTH - 250, SCREEN_HEIGHT -300, "Play", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, tmpSurf.surface, mainFont, m_renderer);
-	soundButton.initialize(SCREEN_WIDTH - 250, SCREEN_HEIGHT -200 , "Sound", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, tmpSurf.surface, mainFont, m_renderer);
-	exitButton.initialize(SCREEN_WIDTH - 250, SCREEN_HEIGHT -100, "Exit", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, tmpSurf.surface, mainFont, m_renderer);
+	// TODO  
+	titleButton.initialize(100, 50, "SDL", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, tmpSurf.surface,  &mainFont, &m_renderer);
+	playButton.initialize(SCREEN_WIDTH - 250, SCREEN_HEIGHT -300, "Play", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, tmpSurf.surface, &mainFont, &m_renderer);
+	soundButton.initialize(SCREEN_WIDTH - 250, SCREEN_HEIGHT -200 , "Sound", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, tmpSurf.surface, &mainFont, &m_renderer);
+	exitButton.initialize(SCREEN_WIDTH - 250, SCREEN_HEIGHT -100, "Exit", SDL_Color{ 255,0,0,255 }, SDL_Color{ 0, 255, 0, 255 }, SDL_Color{ 231, 228, 0 }, tmpSurf.surface, &mainFont, &m_renderer);
 	#pragma endregion
 	tmpSurf.free();
-	TTF_CloseFont(mainFont);
-	TTF_CloseFont(subFont);
-
+	mainFont.close();
+	subFont.close();
 	// --- AUDIO ---
 	
 	Audio bgMusic("../../res/au/mainTheme.mp3");
@@ -95,8 +85,11 @@ int main(int, char*[]) {
 		if (keyInputs.ESC_KEY == true ) {
 			isRunning =  false;
 		}
-		playerTexture.rect.x += ((mainMouse.position.x - playerTexture.rect.w / 2) - playerTexture.rect.x) / 10;
-		playerTexture.rect.y += ((mainMouse.position.y - playerTexture.rect.h / 2) - playerTexture.rect.y) / 10;
+		int rectNewX = playerTexture.rect.x + ((mainMouse.position.x - playerTexture.rect.w / 2) - playerTexture.rect.x) / 10;
+		int rectNewY = playerTexture.rect.y + ((mainMouse.position.y - playerTexture.rect.h / 2) - playerTexture.rect.y) / 10;
+		playerTexture.updateRect(rectNewX, rectNewY);
+			
+		
 	
 		if (checkButtonColision(&mainMouse, &titleButton)) {
 			
@@ -137,15 +130,16 @@ int main(int, char*[]) {
 		}
 
 			// Draw
-			SDL_RenderClear(m_renderer);
-			SDL_RenderCopy(m_renderer, bgText.texture, nullptr, &bgText.rectsdl);
-			SDL_RenderCopy(m_renderer, playerTexture.texture, nullptr, &playerTexture.rectsdl);
-			SDL_RenderCopy(m_renderer, titleButton.texture, nullptr, &titleButton.rectsdl);
-			SDL_RenderCopy(m_renderer, playButton.texture, nullptr, &playButton.rectsdl);
-			SDL_RenderCopy(m_renderer, exitButton.texture, nullptr, &exitButton.rectsdl);
-			SDL_RenderCopy(m_renderer, soundButton.texture, nullptr, &soundButton.rectsdl);
-		
-			SDL_RenderPresent(m_renderer);
+				//TODO Make renderClear, renderCopy and renderPresent my own functions
+			graphicHelper::renderClear(m_renderer.renderer);
+			graphicHelper::renderCopy(m_renderer.renderer, &bgText);
+			graphicHelper::renderCopy(m_renderer.renderer, &playerTexture);
+			graphicHelper::renderCopy(m_renderer.renderer, &titleButton);
+			graphicHelper::renderCopy(m_renderer.renderer, &playButton);
+			graphicHelper::renderCopy(m_renderer.renderer, &exitButton);
+			graphicHelper::renderCopy(m_renderer.renderer, &soundButton);
+			
+			graphicHelper::renderPresent(m_renderer.renderer);
 			keyInputs.clean();
 	}
 	
@@ -159,6 +153,6 @@ int main(int, char*[]) {
 
 		
 	// Quits
-	graphicHelper::closeEverything(m_renderer, m_window);
+	graphicHelper::closeEverything(m_renderer.renderer, m_window.window);
 	return 0;
 }

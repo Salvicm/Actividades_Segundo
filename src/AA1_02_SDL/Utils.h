@@ -43,3 +43,4 @@ static bool checkWallColision(rect_util rectA, rect_util rectB) {
 static float lerp() {
 	return 10.0f;
 }
+
