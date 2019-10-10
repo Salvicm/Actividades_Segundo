@@ -37,6 +37,26 @@ public:
 	void updateRect(int newXValue, int newYValue, int newHValue, int newWValue );
 	void destroy();
 };
+class AnimatedTexture {
+public:
+	AnimatedTexture();
+	//modSize float from 0.0-1.0
+	AnimatedTexture(Renderer *m_renderer, const char *_path, int _posX, int _posY, int numColumns, int numRows, float sizeMod);
+	~AnimatedTexture();
+	SDL_Texture *texture;
+	SDL_Rect libRect, libPos;
+	rect_util rect, pos;
+	int textWidth, textHeight, frameWidth, frameHeight;
+	int frameTime;
+	//modSize float from 0.0-1.0
+	void updateTexture(Renderer *m_renderer, const char *_path, int _posX, int _posY, int numColumns, int numRows, float sizeMod);
+	void updateRect(int newXValue, int newYValue);
+	void updateRect(int newXValue, int newYValue, int newHValue, int newWValue);
+	void updatePosRect(int newXValue, int newYValue);
+	void updatePosRect(int newXValue, int newYValue, int newHValue, int newWValue);
+	void updateAnimation();
+	void destroy();
+};
 
 class Audio {
 public:

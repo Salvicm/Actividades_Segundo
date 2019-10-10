@@ -38,21 +38,20 @@ namespace graphicHelper {
 		SDL_Quit();
 	}
 
-	//TODO Make renderClear, renderCopy and renderPresent my own functions
 	static void renderClear(SDL_Renderer *m_renderer) {
 		SDL_RenderClear(m_renderer);
 	}
 	static void renderCopy(SDL_Renderer *m_renderer, Texture *texture) {
 		SDL_RenderCopy(m_renderer, texture->texture, nullptr, &texture->libRect);
-
 	}
 	static void renderCopy(SDL_Renderer *m_renderer, Interactible *texture) {
 		SDL_RenderCopy(m_renderer, texture->texture, nullptr, &texture->rectLib);
-
+	}
+	static void renderCopy(SDL_Renderer *m_renderer, AnimatedTexture *texture) {
+		SDL_RenderCopy(m_renderer, texture->texture, &texture->libRect, &texture->libPos);
 	}
 	static void renderPresent(SDL_Renderer *m_renderer) {
 		SDL_RenderPresent(m_renderer); 
-
 	}
 
 

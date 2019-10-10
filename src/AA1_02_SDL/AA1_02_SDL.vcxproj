@@ -171,6 +171,7 @@
     <ClInclude Include="graphLibUtils.h" />
     <ClInclude Include="Constantes.h" />
     <ClInclude Include="graphicClasses.h" />
+    <ClInclude Include="Types.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

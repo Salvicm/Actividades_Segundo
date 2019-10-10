@@ -81,6 +81,86 @@ void Texture::destroy()
 
 }
 #pragma endregion
+#pragma region Animated Texture
+AnimatedTexture::AnimatedTexture()
+{
+}
+
+AnimatedTexture::AnimatedTexture(Renderer * m_renderer, const char * _path, int _posX, int _posY, int numColumns, int numRows, float modSize)
+{
+	texture = { IMG_LoadTexture(m_renderer->renderer, _path) };
+	if (texture == nullptr) throw "Error: Texture init";
+	SDL_QueryTexture(texture, NULL, NULL, &textWidth, &textHeight);
+	frameWidth = textWidth / numColumns;
+	frameHeight = textHeight / numRows;
+	updateRect(0, 0, frameHeight, frameWidth);
+	updatePosRect(_posX, _posY, frameHeight*modSize, frameWidth*modSize);
+	frameTime = 0;
+
+}
+
+AnimatedTexture::~AnimatedTexture()
+{
+}
+
+void AnimatedTexture::updateTexture(Renderer * m_renderer, const char * _path, int _posX, int _posY, int numColumns, int numRows, float modSize)
+{
+	texture = { IMG_LoadTexture(m_renderer->renderer, _path) };
+	if (texture == nullptr) throw "Error: Texture init";
+	SDL_QueryTexture(texture, NULL, NULL, &textWidth, &textHeight);
+	frameWidth = textWidth / numColumns;
+	frameHeight = textWidth / numRows;
+	updateRect(0, 0, frameHeight, frameWidth);
+	updatePosRect(_posX, _posY, frameHeight*modSize, frameWidth*modSize);
+	frameTime = 0;
+}
+
+void AnimatedTexture::updateRect(int newXValue, int newYValue)
+{
+
+	rect.x = libRect.x = newXValue;
+	rect.y = libRect.y = newYValue;
+}
+
+void AnimatedTexture::updateRect(int newXValue, int newYValue, int newHValue, int newWValue)
+{
+	rect.h = libRect.h = newHValue;
+	rect.w = libRect.w = newWValue;
+	rect.x = libRect.x = newXValue;
+	rect.y = libRect.y = newYValue;
+}
+
+void AnimatedTexture::updatePosRect(int newXValue, int newYValue)
+{
+	pos.x = libPos.x = newXValue;
+	pos.y = libPos.y = newYValue;
+}
+
+void AnimatedTexture::updatePosRect(int newXValue, int newYValue, int newHValue, int newWValue)
+{
+	pos.h = libPos.h = newHValue;
+	pos.w = libPos.w = newWValue;
+	pos.x = libPos.x = newXValue;
+	pos.y = libPos.y = newYValue;
+}
+
+void AnimatedTexture::updateAnimation()
+{
+	frameTime++;
+	if (FPS / frameTime <= 9) {
+		frameTime = 0;
+		updateRect(rect.x + frameWidth, rect.y);
+		if (rect.x >= textWidth)
+			updateRect(0, rect.y);
+	}
+}
+
+void AnimatedTexture::destroy()
+{
+	SDL_DestroyTexture(texture);
+}
+
+#pragma endregion
 #pragma region Audio
 Audio::Audio()
 {
@@ -240,10 +320,10 @@ void Interactible::lerpSize()
 		lerpSizeController += 0.05f;
 	}
 #pragma endregion
+	int h = Utils::lerp(lerpSizeController, ySize, ySize*1.2f);
+	int w = Utils::lerp(lerpSizeController, xSize, xSize*1.2f);
 	int x = position.x - rect.w / 2;
 	int y = position.y - rect.h / 2;
-	int h = (ySize * (1.0 - lerpSizeController)) + (ySize*1.2 * lerpSizeController);
-	int w = (xSize * (1.0 - lerpSizeController)) + (xSize*1.2 * lerpSizeController);
 	updateRect(x, y, w, h);
 }
 
@@ -265,12 +345,11 @@ void Interactible::normalizeSize(mouseController *mouse)
 {
 	if (mouse->pressedButton == name) {
 		mouse->pressedButton = NO_BUTTON;
-		lerpSizeController = 0;
-		lerpController = true;
 	}
+	lerpSizeController = 0;
+	lerpController = true;
 	texture = noHover;
 	updateRect(position.x - rect.w / 2, position.y - rect.h / 2, xSize, ySize);
 }
 #pragma endregion
-
 
