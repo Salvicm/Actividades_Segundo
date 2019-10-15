@@ -5,7 +5,7 @@
 namespace graphicHelper {
 	// Tienen que ser estáticas al no formar parte de un objeto?
 	static void initLibrary() {
-		if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
+		if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 			throw "Unable to initialize SDL";
 		}
 		if (TTF_Init() != 0) {
