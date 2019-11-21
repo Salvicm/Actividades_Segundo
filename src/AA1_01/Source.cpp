@@ -13,7 +13,6 @@ int main() {
 	std::map<std::string, weapons> weaponIdentifier;
 	utils::initData(enemies, weaponIdentifier);
 	utils::printEnemies(enemies);
-	std::cout << "Hello";
 	system("pause");
 	return 0;
 }
