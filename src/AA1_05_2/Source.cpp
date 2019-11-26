@@ -15,11 +15,12 @@ void Save(std::vector<Object> o, std::string fileName);
 void Recover(std::vector<Object> &o, std::string fileName);
 Object generateRandObject();
 
+// Ejercicio 1: vector Object
 
 int main() {
 	srand(time(NULL));
 	std::vector<Object> objects;
-	/*for (int i = 0; i < 15; i++) {
+	for (int i = 0; i < 15; i++) {
 		objects.push_back(generateRandObject());
 	}
 	for (std::vector<Object>::iterator it = objects.begin(); it != objects.end(); it++)
@@ -28,7 +29,7 @@ int main() {
 	}
 	Save(objects, "Obj.UwU");
 	objects.clear();
-	*/
+	
 	Recover(objects, "Obj.UwU");
 	std::cout << "RECOVERED\n";
 	for (std::vector<Object>::iterator it = objects.begin(); it != objects.end(); it++)
@@ -49,7 +50,7 @@ void Save(std::vector<Object> o, std::string fileName) {
 		writeFile.write(reinterpret_cast<char *>(&len), sizeof(size_t));
 		// Hacerlo así, con el [0] nos sirve en este caso al ser un vector, porque tienen todos los datos consecutivos en memoria.
 		// En el caso de hacerlo con stack ü otros tipos de stl, podría petar, así que habría que hacerlo uno a uno volcando la memoria.
-		writeFile.write(reinterpret_cast<char *>(&o[0]), sizeof(Object) * len);
+		writeFile.write(reinterpret_cast<char *>(o.data()), sizeof(Object) * len);
 		writeFile.close();
 	}
 	catch (std::exception e) {
@@ -67,7 +68,7 @@ void Recover(std::vector<Object> &o, std::string fileName) {
 		// Esto nos permite que sea escalable
 		o.clear();
 		o.resize(len);
-		readFile.read(reinterpret_cast<char *>(&o[0]), sizeof(Object) * len);
+		readFile.read(reinterpret_cast<char *>(o.data()), sizeof(Object) * len);
 		readFile.close();
 	}
 	catch (std::exception e) {

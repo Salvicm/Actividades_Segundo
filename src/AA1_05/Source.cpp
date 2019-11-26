@@ -7,13 +7,14 @@
 void SaveVector(std::vector<int> o, std::string fileName);
 void RecoverVector(std::vector<int> &o, std::string fileName);
 
-
+// Ejercicio 1: vector int
 int main() {
-	std::vector<int> tmpVect({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
-	SaveVector(tmpVect, "Save.bin");
+	// std::vector<int> tmpVect({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
+	std::vector<int> tmpVect;
+	/*SaveVector(tmpVect, "Save.bin");
 	for (int i = 0; i < 10; i++) {
 		tmpVect[i] = tmpVect[i] + 10;
-	};
+	};*/
 	RecoverVector(tmpVect, "Save.bin");
 	for (int i = 0; i < tmpVect.size(); i++) {
 		std::cout << tmpVect[i] << "\n";
@@ -31,7 +32,7 @@ void SaveVector(std::vector<int> o, std::string fileName) {
 			throw std::exception("No se ha podido abrir el fichero");
 		size_t len = o.size();
 		writeFile.write(reinterpret_cast<char *>(&len), sizeof(size_t));
-		writeFile.write(reinterpret_cast<char *>(&o[0]), sizeof(int) * len);
+		writeFile.write(reinterpret_cast<char *>(o.data()), sizeof(int) * len); // .data() retorna ün püntero donde se almacenan los datos del vector
 		writeFile.close();
 	}
 	catch (std::exception e) {
@@ -49,7 +50,7 @@ void RecoverVector(std::vector <int> &o, std::string fileName) {
 		// Esto nos permite que sea escalable
 		o.clear();
 		o.resize(len);
-		readFile.read(reinterpret_cast<char *>(&o[0]), sizeof(int) * len);
+		readFile.read(reinterpret_cast<char *>(o.data()), sizeof(int) * len);
 		readFile.close();
 	}
 	catch (std::exception e) {
