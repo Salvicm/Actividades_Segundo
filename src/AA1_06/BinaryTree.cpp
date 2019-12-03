@@ -40,78 +40,65 @@ int BinaryTree::GetNumberNodes()
 
 int BinaryTree::GetNumberNodesI()
 {
+	if (Root == nullptr) return 0;
+	
 	std::stack<node*> notVisited;
 	int counter = 0;
-	node* tmpNode;
-	bool allVisited = false;
-	if (Root != nullptr) {
-		tmpNode = Root;
+	node* tmpNode;	
+	notVisited.push(Root);
+	while (!notVisited.empty())
+	{
+		// La versión de Tona
+		tmpNode = notVisited.top();
+		notVisited.pop();
 		counter++;
-	
-
-		do
-		{
-			// Suponiendo que la izda siempre ha sido insertada primera
-			if (tmpNode->left != nullptr) { // comprobar la izquierda
-				if (tmpNode->right != nullptr) { // Si la derecha está agregado, añadirlo a la lista
-					notVisited.push(tmpNode->right);
-				}
-				tmpNode = tmpNode->left;
+		if (tmpNode->right)
+			notVisited.push(tmpNode->right);
+		if (tmpNode->left)
+			notVisited.push(tmpNode->left);
+		
+		
+		/* MI VERSION
+		// Suponiendo que la izda siempre ha sido insertada primera
+		if (tmpNode->left != nullptr) { // comprobar la izquierda
+			if (tmpNode->right != nullptr) { // Si la derecha está agregado, añadirlo a la lista
+				notVisited.push(tmpNode->right);
+			}
+			tmpNode = tmpNode->left;
+			counter++;
+		}
+		else { // Si la izquierda es nullptr entonces la derecha tambien
+			if (!notVisited.empty()) {
+				tmpNode = notVisited.top(); // pilla la que esté en top
+				notVisited.pop();
 				counter++;
 			}
-			else { // Si la izquierda es nullptr entonces la derecha tambien
-				if (!notVisited.empty()) {
-					tmpNode = notVisited.top(); // pilla la que esté en top
-					notVisited.pop();
-					counter++;
-				}
-				else {
-					allVisited = true;
-				}
-			}
-
-
-
-		} while (!allVisited);
-	}
+		}*/
+	} 
+	
 	return counter;
 }
 
 void BinaryTree::PreorderI()
 {
+	
+
 	std::stack<node*> notVisited;
 	node* tmpNode;
-	bool allVisited = false;
-	if (Root != nullptr) {
-		tmpNode = Root;
-		std::cout << tmpNode->value << std::endl;
-		do
-		{
-			// Suponiendo que la izda siempre ha sido insertada primera
-			if (tmpNode->left != nullptr) { // comprobar la izquierda
-				if (tmpNode->right != nullptr) { // Si la derecha está agregado, añadirlo a la lista
-					notVisited.push(tmpNode->right);
-				}
-				tmpNode = tmpNode->left;
-				std::cout << tmpNode->value << std::endl;
-
-			}
-			else { // Si la izquierda es nullptr entonces la derecha tambien
-				if (!notVisited.empty()) {
-					tmpNode = notVisited.top(); // pilla la que esté en top
-					notVisited.pop();
-					std::cout << tmpNode->value << std::endl;
-
-				}
-				else {
-					allVisited = true;
-				}
-			}
-
-
-
-		} while (!allVisited);
+	if(Root != nullptr)
+		notVisited.push(Root);
+	while (!notVisited.empty())
+	{
+		// La versión de Tona
+		tmpNode = notVisited.top();
+		notVisited.pop();
+		std::cout << tmpNode->value << ", ";
+		if (tmpNode->right)
+			notVisited.push(tmpNode->right);
+		if (tmpNode->left)
+			notVisited.push(tmpNode->left);
 	}
+	std::cout << std::endl;
 }
 
 int BinaryTree::Height()
