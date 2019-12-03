@@ -23,6 +23,14 @@ BinaryTree::~BinaryTree()
 
 void BinaryTree::PreOrder()
 {
+	PreOrder(Root);
+}
+void BinaryTree::PreOrder(node * tmp)
+{
+
+	PreOrder(tmp->left);
+
+	PreOrder(tmp->right);
 }
 
 void BinaryTree::InOrder()
@@ -35,7 +43,25 @@ void BinaryTree::PostOrder()
 
 int BinaryTree::GetNumberNodes()
 {
-	return 0;
+
+	return GetNumberNodes(Root);
+}
+
+int BinaryTree::GetNumberNodes(node * tmp)
+{
+
+	if (tmp == nullptr)
+		return 0;
+	return GetNumberNodes(tmp->left) + GetNumberNodes(tmp->right) + 1;
+}
+
+
+void BinaryTree::PostOrder(node * tmp)
+{
+}
+
+void BinaryTree::InOrder(node * tmp)
+{
 }
 
 int BinaryTree::GetNumberNodesI()

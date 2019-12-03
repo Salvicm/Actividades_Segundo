@@ -15,6 +15,11 @@ struct node {
 class BinaryTree
 {
 	node* Root;
+	int GetNumberNodes(node* tmp);
+	void PreOrder(node* tmp);
+	void PostOrder(node* tmp);
+	void InOrder(node* tmp);
+
 public:
 	BinaryTree();
 	~BinaryTree();
