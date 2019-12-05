@@ -17,6 +17,7 @@ BinaryTree::BinaryTree()
 
 BinaryTree::~BinaryTree()
 {
+	// Recursiva
 }
 
 
@@ -25,20 +26,41 @@ void BinaryTree::PreOrder()
 {
 	PreOrder(Root);
 }
+
 void BinaryTree::PreOrder(node * tmp)
 {
-
-	PreOrder(tmp->left);
-
-	PreOrder(tmp->right);
+	if (tmp) {
+		std::cout << tmp->value << ", ";
+		PreOrder(tmp->left);
+		PreOrder(tmp->right);
+	}
 }
+
 
 void BinaryTree::InOrder()
 {
+	InOrder(Root);
 }
+void BinaryTree::InOrder(node * tmp) 
+{
+	if (tmp) {
+		InOrder(tmp->left);
+		std::cout << tmp->value << ", ";
+		InOrder(tmp->right);
+	}
+}
+
 
 void BinaryTree::PostOrder()
 {
+	PostOrder(Root);
+}
+void BinaryTree::PostOrder(node * tmp) {
+	if (tmp) {
+		PostOrder(tmp->left);
+		PostOrder(tmp->right);
+		std::cout << tmp->value << ", ";
+	}
 }
 
 int BinaryTree::GetNumberNodes()
@@ -56,13 +78,6 @@ int BinaryTree::GetNumberNodes(node * tmp)
 }
 
 
-void BinaryTree::PostOrder(node * tmp)
-{
-}
-
-void BinaryTree::InOrder(node * tmp)
-{
-}
 
 int BinaryTree::GetNumberNodesI()
 {
@@ -83,23 +98,7 @@ int BinaryTree::GetNumberNodesI()
 		if (tmpNode->left)
 			notVisited.push(tmpNode->left);
 		
-		
-		/* MI VERSION
-		// Suponiendo que la izda siempre ha sido insertada primera
-		if (tmpNode->left != nullptr) { // comprobar la izquierda
-			if (tmpNode->right != nullptr) { // Si la derecha está agregado, añadirlo a la lista
-				notVisited.push(tmpNode->right);
-			}
-			tmpNode = tmpNode->left;
-			counter++;
-		}
-		else { // Si la izquierda es nullptr entonces la derecha tambien
-			if (!notVisited.empty()) {
-				tmpNode = notVisited.top(); // pilla la que esté en top
-				notVisited.pop();
-				counter++;
-			}
-		}*/
+	
 	} 
 	
 	return counter;
@@ -107,15 +106,12 @@ int BinaryTree::GetNumberNodesI()
 
 void BinaryTree::PreorderI()
 {
-	
-
 	std::stack<node*> notVisited;
 	node* tmpNode;
 	if(Root != nullptr)
 		notVisited.push(Root);
 	while (!notVisited.empty())
 	{
-		// La versión de Tona
 		tmpNode = notVisited.top();
 		notVisited.pop();
 		std::cout << tmpNode->value << ", ";
@@ -126,8 +122,11 @@ void BinaryTree::PreorderI()
 	}
 	std::cout << std::endl;
 }
+int BinaryTree::Height(node* n) {
 
+	return 1 + Height(n->left);
+}
 int BinaryTree::Height()
 {
-	return 0;
+	return Height(Root);
 }

@@ -32,5 +32,8 @@ public:
 	int GetNumberNodesI();
 	void PreorderI();
 	int Height();
+	int Height(node* n);
+
 };
+
 
