@@ -11,6 +11,12 @@ struct node {
 	int value;
 	node() : value(rand() % 99 + 1), left(nullptr), right(nullptr) {};
 	node(int _value) : value(_value), left(nullptr), right(nullptr) {};
+	~node(){
+		if (left != nullptr)
+			delete left;
+		if (right != nullptr)
+			delete right;
+	};
 };
 class BinaryTree
 {

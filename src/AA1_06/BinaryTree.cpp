@@ -17,7 +17,7 @@ BinaryTree::BinaryTree()
 
 BinaryTree::~BinaryTree()
 {
-	// Recursiva
+	delete Root;
 }
 
 
@@ -55,6 +55,7 @@ void BinaryTree::PostOrder()
 {
 	PostOrder(Root);
 }
+
 void BinaryTree::PostOrder(node * tmp) {
 	if (tmp) {
 		PostOrder(tmp->left);
@@ -124,7 +125,13 @@ void BinaryTree::PreorderI()
 }
 int BinaryTree::Height(node* n) {
 
-	return 1 + Height(n->left);
+	if (n == nullptr)
+		return 0;
+
+	if(Height(n->left) > Height(n->right))
+		return 1 + Height(n->left);
+	else 
+		return 1 + Height(n->right);
 }
 int BinaryTree::Height()
 {
