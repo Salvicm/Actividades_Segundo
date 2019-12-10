@@ -3,7 +3,7 @@
 #include <time.h>
 #include <iostream>
 #include <stack>
-
+#include <algorithm>    // std::max
 
 struct node {
 	node* left;

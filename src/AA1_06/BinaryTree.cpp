@@ -14,13 +14,10 @@ BinaryTree::BinaryTree()
 	Root->right->right = new node(6);
 }
 
-
 BinaryTree::~BinaryTree()
 {
 	delete Root;
 }
-
-
 
 void BinaryTree::PreOrder()
 {
@@ -35,7 +32,6 @@ void BinaryTree::PreOrder(node * tmp)
 		PreOrder(tmp->right);
 	}
 }
-
 
 void BinaryTree::InOrder()
 {
@@ -77,8 +73,6 @@ int BinaryTree::GetNumberNodes(node * tmp)
 		return 0;
 	return GetNumberNodes(tmp->left) + GetNumberNodes(tmp->right) + 1;
 }
-
-
 
 int BinaryTree::GetNumberNodesI()
 {
@@ -123,17 +117,18 @@ void BinaryTree::PreorderI()
 	}
 	std::cout << std::endl;
 }
+
+int BinaryTree::Height()
+{
+	return Height(Root);
+}
+
 int BinaryTree::Height(node* n) {
 
 	if (n == nullptr)
 		return 0;
 
-	if(Height(n->left) > Height(n->right))
-		return 1 + Height(n->left);
-	else 
-		return 1 + Height(n->right);
+	
+		return 1 + std::max(Height(n->left), Height(n->right));
 }
-int BinaryTree::Height()
-{
-	return Height(Root);
-}
+
