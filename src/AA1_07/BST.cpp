@@ -33,15 +33,14 @@ void BST::Insert(int key)
 {
 	 Insert(key, root); // ->Recursivo
 	// iterativo
-	/*node* tmp = root;
-	bool inserted = false;
+/*	node* tmp = root;
 	if (root == nullptr) {
 		root = new node(key);
-		inserted = true;
+		return;
 	}
-	while (!inserted) {
+	while (true) {
 		if (key == tmp->value) {
-			inserted = true; // Si ya existe consideralo insertado
+			return;
 		}
 		else if (key < tmp->value) { // Si es menor
 			if (tmp->left) { // Y se puede bajar mas
@@ -49,7 +48,7 @@ void BST::Insert(int key)
 			}
 			else { // Si no Puedes bajar
 				tmp->left = new node(key); // Insertalo
-				inserted = true;
+				return;
 			}
 		}
 		else if (key > tmp->value) { // Lo mismo pero hacia la derecha con numeros mayores
@@ -58,7 +57,7 @@ void BST::Insert(int key)
 			}
 			else {
 				tmp->right = new node(key);
-				inserted = true;
+				return;
 			}
 		}
 	}*/
@@ -66,19 +65,19 @@ void BST::Insert(int key)
 
 void BST::Insert(int key, node * &n)
 {
-	// Recursivo ->No termina de funcionar
 	
 	// Comprueba si existe por si acaso
 	if (n) {
-		if (n->value < key) { // Si es menor
+		if (n->value > key) { // Si es menor
 				Insert(key, n->left); // Comprueba ese lado	
 		}
-		else if (n->value > key) { // Repite pero con la derecha
+		else if (n->value < key) { // Repite pero con la derecha
 				Insert(key, n->right);
 		}
 	}
 	else {
 		n = new node(key);
+		return;
 	}
 
 	
