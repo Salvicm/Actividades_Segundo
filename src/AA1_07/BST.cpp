@@ -10,6 +10,7 @@ BST::BST()
 
 BST::~BST()
 {
+	// Hacer una función recursiva extra, el tree debe eliminar los nodos, los nodos no pueden eliminarse solos
 	delete root;
 }
 
@@ -32,35 +33,6 @@ node * BST::Search(int key, node * n) {
 void BST::Insert(int key)
 {
 	 Insert(key, root); // ->Recursivo
-	// iterativo
-/*	node* tmp = root;
-	if (root == nullptr) {
-		root = new node(key);
-		return;
-	}
-	while (true) {
-		if (key == tmp->value) {
-			return;
-		}
-		else if (key < tmp->value) { // Si es menor
-			if (tmp->left) { // Y se puede bajar mas
-				tmp = tmp->left; // Insertalo
-			}
-			else { // Si no Puedes bajar
-				tmp->left = new node(key); // Insertalo
-				return;
-			}
-		}
-		else if (key > tmp->value) { // Lo mismo pero hacia la derecha con numeros mayores
-			if (tmp->right) {
-				tmp = tmp->right;
-			}
-			else {
-				tmp->right = new node(key);
-				return;
-			}
-		}
-	}*/
 }
 
 void BST::Insert(int key, node * &n)
