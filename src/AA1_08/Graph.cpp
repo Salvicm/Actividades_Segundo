@@ -15,7 +15,9 @@ Graph::Graph(std::vector<edge> e1)
 {
 	// Hacer
 	// const lista de arcos	
-	std::vector<edge>::const_iterator it = e1.begin();
+	for (std::vector<edge>::const_iterator it = e1.begin(); it != e1.end(); it++) {
+		Insert(*it);
+	}
 
 
 }
