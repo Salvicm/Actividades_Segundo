@@ -13,13 +13,10 @@ Graph::Graph(Graph * g)
 
 Graph::Graph(std::vector<edge> e1)
 {
-	// Hacer
 	// const lista de arcos	
 	for (std::vector<edge>::const_iterator it = e1.begin(); it != e1.end(); it++) {
 		Insert(*it);
 	}
-
-
 }
 
 
@@ -29,8 +26,6 @@ Graph::~Graph()
 
 void Graph::Insert(edge _edge)
 {
-	
-	// Hacer
 	// Inserta el arco si no existe
 	graph.try_emplace(_edge.first);
 	std::vector<vertex>* mapVect = &graph.at(_edge.first);
@@ -43,7 +38,6 @@ void Graph::Insert(edge _edge)
 
 void Graph::Remove(edge _edge)
 {
-	// Hacer
 	// Borra el arco si existe
 	std::vector<vertex>* mapVect;
 	std::map<vertex, std::vector<vertex>>::iterator it;
@@ -71,9 +65,7 @@ bool Graph::path(vertex initial, vertex final, std::forward_list<vertex> vlist)
 
 void Graph::Print()
 {
-	// Hacer
 	// Imprime la lista de arcos
-	
 	for (std::map<vertex, std::vector<vertex>>::iterator it = graph.begin(); it != graph.end(); it++) {
 		std::cout << "Node " << it->first << " Connects to: \n";
 		for (std::vector<vertex>::iterator itVect = it->second.begin(); itVect != it->second.end(); itVect++) {
