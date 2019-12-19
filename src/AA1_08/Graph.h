@@ -13,6 +13,8 @@ class Graph
 {
 private:
 	std::map<vertex, std::vector<vertex>> graph;
+	bool isDirected = false;
+	
 public:
 	Graph();
 	Graph(Graph* g); // Constructor copia
@@ -24,7 +26,7 @@ public:
 	bool Path(vertex initial, vertex final);
 	bool path(vertex initial, vertex final, std::forward_list<vertex> vlist);
 	void Print();
-
+	void Directed(bool b);
 	bool IsEulerian();
 	int Index(vertex _vertex);
 };

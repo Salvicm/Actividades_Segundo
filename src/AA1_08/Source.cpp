@@ -3,24 +3,21 @@
 int main() {
 	
 	Graph myGraph;
-	for (int i = 0; i < 10; i++) {
-		for (int j = 0; j < 10; j++) {
-			myGraph.Insert({ i, j });
-		}
-	}
+	myGraph.Insert({ 1,3 });
+	myGraph.Insert({ 1,4 });
+	myGraph.Insert({ 2,4 });
 	myGraph.Print();
+	std::cout << "Index in 1: " << myGraph.Index(1) << std::endl;
+	std::cout << "Euleriano: " << myGraph.IsEulerian() << std::endl;
 	std::cout << "______________\n";
-	std::vector<edge> edges;
-	edges.push_back({ 1,1 });
-	edges.push_back({ 1,2 });
-	edges.push_back({ 2,1 });
-	edges.push_back({ 1,3 });
-	edges.push_back({ 1,4 });
-	edges.push_back({ 5,3 });
-	edges.push_back({ 2,3 });
+	myGraph.Directed(true);
+	myGraph.Remove({ 4,2 });
+	myGraph.Insert({ 5,1 });
+	myGraph.Print();
+	std::cout << "Index in 2: " << myGraph.Index(2) << std::endl;
 
-	Graph myGraph2(edges);
-	myGraph2.Print();
+	std::cout << "Euleriano: " << myGraph.IsEulerian() << std::endl;
+
 	system("Pause");
 	return 0;
 }

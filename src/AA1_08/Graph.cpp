@@ -31,9 +31,12 @@ void Graph::Insert(edge _edge)
 	std::vector<vertex>* mapVect = &graph.at(_edge.first);
 	// Guardamos el vector en un puntero para evitar buscar todo el rato
 	std::vector<vertex>::const_iterator it = std::find(mapVect->begin(), mapVect->end(), _edge.second);
-	if(it == mapVect->end())
+	if (it == mapVect->end()) {
+
 		mapVect->push_back(_edge.second);
-	
+		if (!isDirected)
+			Insert({ _edge.second, _edge.first });
+	}
 }
 
 void Graph::Remove(edge _edge)
@@ -46,8 +49,13 @@ void Graph::Remove(edge _edge)
 	if (it != graph.end()) {
 		std::vector<vertex>* mapVect = &(it->second);
 		std::vector<vertex>::iterator vertexIt = std::find(mapVect->begin(), mapVect->end(), _edge.second);
-		if (vertexIt != mapVect->end())
+		if (vertexIt != mapVect->end()) {
 			mapVect->erase(vertexIt);
+			if (mapVect->size() == 0)
+				graph.erase(it); // Si ya no existe nodo, borra la parte de la izquierda
+			if (!isDirected)
+				Remove({ _edge.second, _edge.first });
+		}
 	}
 }
 
@@ -74,14 +82,39 @@ void Graph::Print()
 	}
 }
 
+void Graph::Directed(bool b)
+{
+	isDirected = b;
+}
+
 bool Graph::IsEulerian()
 {
 	// Verifica que sea euleriano
-	return false;
+	int numberOddIndexes = 0;
+	std::map<vertex, std::vector<vertex>>::iterator it = graph.begin();
+	while (it != graph.end()) {
+		if (Index(it->first) % 2 != 0)
+			if (numberOddIndexes < 3) 
+				numberOddIndexes++;
+			else 
+				return false;
+		
+		it++;
+	}
+	return true;
 }
 
 int Graph::Index(vertex _vertex)
 {
+	// Si retorna 0 es que no existe ningún ese nodo
 	// Calcula el índice
+	std::map<vertex, std::vector<vertex>>::iterator it = graph.find(_vertex);
+	if (it != graph.end()) {
+		std::vector<vertex>* tmpVect = &(it->second);
+		if (std::find(tmpVect->begin(), tmpVect->end(), _vertex) != tmpVect->end()) { // Si está conectado a si mismo descontarlo
+			return tmpVect->size() - 1;
+		}
+		else return tmpVect->size();
+	}
 	return 0;
 }
