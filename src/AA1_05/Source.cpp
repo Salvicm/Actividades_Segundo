@@ -8,18 +8,21 @@ void SaveVector(std::vector<int> o, std::string fileName);
 void RecoverVector(std::vector<int> &o, std::string fileName);
 
 // Ejercicio 1: vector int
-int main() {
-	// std::vector<int> tmpVect({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
-	std::vector<int> tmpVect;
-	/*SaveVector(tmpVect, "Save.bin");
-	for (int i = 0; i < 10; i++) {
-		tmpVect[i] = tmpVect[i] + 10;
-	};*/
-	RecoverVector(tmpVect, "Save.bin");
-	for (int i = 0; i < tmpVect.size(); i++) {
-		std::cout << tmpVect[i] << "\n";
-	};
 
+int main()
+{
+
+	//AA1_05: Ejercicio 1
+	std::vector<int> a({ 1,2,3,4,5,6,7,8,9,10 });
+	SaveVector(a, "TestSaveVector.bin");
+	for (int i = 0; i < 10; i++) { a[i] = a[i] + 10; };
+	a.push_back(1000);
+	RecoverVector(a, "TestSaveVector.bin");
+	std::cout << "Ejercicio1: ";
+	for (int i = 0; i < a.size(); i++) { std::cout << a[i] << ","; };
+
+	std::cout << std::endl;
+	
 	system("pause");
 	return 0;
 }

@@ -13,29 +13,33 @@ struct Object {
 };
 void Save(std::vector<Object> o, std::string fileName);
 void Recover(std::vector<Object> &o, std::string fileName);
-Object generateRandObject();
 
-// Ejercicio 1: vector Object
+// Podemos hacer un template
+int main()
+{
+	//AA1_05: Ejercicio 2
 
-int main() {
-	srand(time(NULL));
 	std::vector<Object> objects;
-	for (int i = 0; i < 15; i++) {
-		objects.push_back(generateRandObject());
-	}
-	for (std::vector<Object>::iterator it = objects.begin(); it != objects.end(); it++)
-	{
-		std::cout << "X: " << it->x << " Y: " << it->y << " Type: " << it->type << std::endl;
-	}
-	Save(objects, "Obj.UwU");
-	objects.clear();
-	
-	Recover(objects, "Obj.UwU");
-	std::cout << "RECOVERED\n";
-	for (std::vector<Object>::iterator it = objects.begin(); it != objects.end(); it++)
-	{
-		std::cout << "X: " << it->x << " Y: " << it->y << " Type: " << it->type << std::endl;
-	}
+
+	objects.push_back({ 'a',1,11 });
+	objects.push_back({ 'b',2,22 });
+	objects.push_back({ 'c',3,33 });
+	objects.push_back({ 'd',4,44 });
+	objects.push_back({ 'e',5,55 });
+	//guardo 5
+	Save(objects, "TestSaveObjects.bin");
+	objects[0] = { 'x',6,66 };
+	objects[4] = { 'z',9,99 };
+	objects.push_back({ 'f',7,77 });
+	//hay 6
+	Recover(objects, "TestSaveObjects.bin");
+	//recupero
+	std::cout << "Ejercicio2: " << std::endl;
+	for (int i = 0; i < objects.size(); i++) {
+		std::cout << i << ":" << objects[i].type << "," << objects[i].x << "," << objects[i].y;
+		std::cout << std::endl;
+	};
+
 	system("pause");
 	return 0;
 }
@@ -49,7 +53,7 @@ void Save(std::vector<Object> o, std::string fileName) {
 		size_t len = o.size();
 		writeFile.write(reinterpret_cast<char *>(&len), sizeof(size_t));
 		// Hacerlo así, con el [0] nos sirve en este caso al ser un vector, porque tienen todos los datos consecutivos en memoria.
-		// En el caso de hacerlo con stack ü otros tipos de stl, podría petar, así que habría que hacerlo uno a uno volcando la memoria.
+		// La mejor forma de hacerlo es con .data
 		writeFile.write(reinterpret_cast<char *>(o.data()), sizeof(Object) * len);
 		writeFile.close();
 	}

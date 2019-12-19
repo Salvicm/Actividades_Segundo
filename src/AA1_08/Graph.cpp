@@ -26,6 +26,9 @@ Graph::~Graph()
 
 void Graph::Insert(edge _edge)
 {
+	// Podríamos hacer simplemente graph[_edge.first] y graph[_edge.second] 
+		// y al büscarla, si no existe, la crea.
+
 	// Inserta el arco si no existe
 	graph.try_emplace(_edge.first);
 	std::vector<vertex>* mapVect = &graph.at(_edge.first);
@@ -47,12 +50,11 @@ void Graph::Remove(edge _edge)
 	it = graph.find(_edge.first);
 
 	if (it != graph.end()) {
-		std::vector<vertex>* mapVect = &(it->second);
+		mapVect = &(it->second);
 		std::vector<vertex>::iterator vertexIt = std::find(mapVect->begin(), mapVect->end(), _edge.second);
 		if (vertexIt != mapVect->end()) {
 			mapVect->erase(vertexIt);
-			if (mapVect->size() == 0)
-				graph.erase(it); // Si ya no existe nodo, borra la parte de la izquierda
+			// Podríamos hacer que se borre el nodo si queremos si el size = 0
 			if (!isDirected)
 				Remove({ _edge.second, _edge.first });
 		}
@@ -90,18 +92,22 @@ void Graph::Directed(bool b)
 bool Graph::IsEulerian()
 {
 	// Verifica que sea euleriano
-	int numberOddIndexes = 0;
-	std::map<vertex, std::vector<vertex>>::iterator it = graph.begin();
-	while (it != graph.end()) {
-		if (Index(it->first) % 2 != 0)
-			if (numberOddIndexes < 3) 
-				numberOddIndexes++;
-			else 
-				return false;
-		
-		it++;
+	if (isDirected) {
+		int numberOddIndexes = 0;
+		std::map<vertex, std::vector<vertex>>::iterator it = graph.begin();
+		while (it != graph.end()) {
+			if (Index(it->first) % 2 != 0)
+				if (numberOddIndexes < 3)
+					numberOddIndexes++;
+				else
+					return false;
+
+			it++;
+		}
+
+		return true;
 	}
-	return true;
+	return false;
 }
 
 int Graph::Index(vertex _vertex)
