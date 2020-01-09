@@ -19,6 +19,11 @@ node * BST::Search(int key)
 	return Search(key, root);
 }
 
+void BST::PrintPath(std::queue<int> path)
+{
+	PrintPath(path, root);
+}
+
 node * BST::Search(int key, node * n) {
 	if (!n) // Si n no existe retorna nulo(Mantener una comprobación)
 		return nullptr;
@@ -41,10 +46,10 @@ void BST::Insert(int key, node * &n)
 	// Comprueba si existe por si acaso
 	if (n) {
 		if (n->value > key) { // Si es menor
-				Insert(key, n->left); // Comprueba ese lado	
+			Insert(key, n->left); // Comprueba ese lado	
 		}
 		else if (n->value < key) { // Repite pero con la derecha
-				Insert(key, n->right);
+			Insert(key, n->right);
 		}
 	}
 	else {
@@ -53,6 +58,23 @@ void BST::Insert(int key, node * &n)
 	}
 
 	
+}
+
+void BST::PrintPath(std::queue<int>& path, node *& n)
+{
+
+	if (n != nullptr && path.size() > 0) {
+		int i = path.front();
+		path.pop();
+		std::cout << n->value << std::endl;
+		if (i == -1)
+			PrintPath(path, n->left);
+
+		else if (i == -2)
+			PrintPath(path, n->right);
+	}
+	else
+		return;
 }
 
 bool BST::Exist(int key)
