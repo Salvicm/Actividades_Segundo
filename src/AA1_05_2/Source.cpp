@@ -65,7 +65,6 @@ void Recover(std::vector<Object> &o, std::string fileName) {
 			throw std::exception("No se ha podido abrir el fichero");
 		size_t len;
 		readFile.read(reinterpret_cast<char *>(&len), sizeof(size_t));
-		// Esto nos permite que sea escalable
 		o.clear();
 		o.resize(len);
 		readFile.read(reinterpret_cast<char *>(o.data()), sizeof(Object) * len);
