@@ -12,7 +12,6 @@ struct myStruct {
 template<typename T, int L = 10>
 T couter(const T const a) {
 	   std::cout <<  " " << L << " " << a << std::endl;
-
 	return a;
 }
 template<int L = 10>
@@ -30,6 +29,8 @@ T addAll(std::vector<T> list) {
 	return count;
 }
 
+
+
 template<>
 std::string addAll(std::vector<std::string> list) {
 	std::string total = "";
@@ -39,6 +40,13 @@ std::string addAll(std::vector<std::string> list) {
 	return total;
 }
 
+template <typename T, int t>
+T funct(T m) {
+	for (int i = 0; i < t; i++) {
+		std::cout << m << ": " << i << std::endl;
+	}
+	return m;
+}
 
 void testFex1() {
 	couter<int, 20>(10);
@@ -59,8 +67,11 @@ void testVects() {
 	std::cout << addAll<std::string>(vecStr) << std::endl;
 }
 
+void testFunct() {
+	funct<int, 5>(5);
+}
 int main() {
-	testFex1();
+	testFunct();
 
 	
 	
