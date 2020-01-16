@@ -6,6 +6,7 @@ int main() {
 	myGraph.Insert({ 1,3 });
 	myGraph.Insert({ 1,4 });
 	myGraph.Insert({ 2,4 });
+	
 	myGraph.Print();
 	std::cout << "Index in 1: " << myGraph.Index(1) << std::endl;
 	std::cout << "Euleriano: " << myGraph.IsEulerian() << std::endl;
@@ -17,7 +18,10 @@ int main() {
 	std::cout << "Index in 2: " << myGraph.Index(2) << std::endl;
 
 	std::cout << "Euleriano: " << myGraph.IsEulerian() << std::endl;
-
+	
+	Graph myGraph2;
+	myGraph2 = myGraph;
+	myGraph2.Print();
 	system("Pause");
 	return 0;
 }
